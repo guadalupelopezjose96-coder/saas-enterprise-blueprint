@@ -1,0 +1,90 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: enforce-slsa-signature-and-hardening
+  annotations:
+    policies.kyverno.io/title: "Verificación Criptográfica Cosign, SBOM y Hardening CIS Nivel 2"
+    policies.kyverno.io/category: "SOC2-CC6.8-CC8.1-ISO27001-A.8.19-A.8.32"
+    policies.kyverno.io/severity: "critical"
+spec:
+  validationFailureAction: Enforce
+  background: true
+  webhookTimeoutSeconds: 15
+  rules:
+    - name: verify-cosign-signature-and-cyclonedx-sbom
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              namespaces:
+                - saas-prod
+      verifyImages:
+        - imageReferences:
+            - "ghcr.io/*"
+          mutateDigest: true
+          verifyDigest: true
+          required: true
+          attestors:
+            - entries:
+                - keyless:
+                    subject: "https://github.com/*"
+                    issuer: "https://token.actions.githubusercontent.com"
+                    rekor:
+                      url: https://rekor.sigstore.dev
+          attestations:
+            - type: https://cyclonedx.org/schema
+              attestors:
+                - entries:
+                    - keyless:
+                        subject: "https://github.com/*"
+                        issuer: "https://token.actions.githubusercontent.com"
+
+    - name: enforce-non-root-and-readonly-rootfs
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              namespaces:
+                - saas-prod
+      validate:
+        message: "BLOQUEO DE SEGURIDAD (ISO 8.18/8.19): Todo contenedor debe ejecutarse como no-root, con sistema de archivos de solo lectura y sin escalación de privilegios."
+        pattern:
+          spec:
+            securityContext:
+              runAsNonRoot: true
+              seccompProfile:
+                type: RuntimeDefault
+            containers:
+              - securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: true
+                  runAsNonRoot: true
+                  capabilities:
+                    drop:
+                      - ALL
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default-strict-mtls
+  namespace: saas-prod
+  annotations:
+    compliance.saas.io/control: "CRY-01 / ISO 27001 A.8.20 / DPA TOMs"
+spec:
+  mtls:
+    mode: STRICT
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all-traffic
+  namespace: saas-prod
+  annotations:
+    compliance.saas.io/control: "NET-01 / ISO 27001 A.8.22"
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress

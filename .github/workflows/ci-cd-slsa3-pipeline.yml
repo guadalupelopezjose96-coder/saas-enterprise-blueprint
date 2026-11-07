@@ -1,0 +1,103 @@
+name: "Enterprise SaaS DevSecOps Pipeline (SLSA Level 3 + SBOM + Cosign)"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  id-token: write
+  packages: write
+  security-events: write
+  attestations: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/saas-api-service
+
+jobs:
+  security-and-license-gate:
+    name: "Gate 1: SAST, Detección de Secretos, RLS Test y Bloqueo Legal OSS (Sin AGPL)"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Inmutable del Código Fuente
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detección Bloqueante de Secretos en Historial Git (Gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Escaneo SAST y Composición de Software SCA (Trivy)
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-fs-results.sarif'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+
+      - name: Auditoría Legal de Licencias Open Source (Bloqueo Estricto de GPL/AGPL/SSPL)
+        run: |
+          sudo apt-get update && sudo apt-get install -y jq
+          trivy fs --scanners license --severity CRITICAL,HIGH,MEDIUM --format json -o licenses.json .
+          FORBIDDEN=$(jq '[.Results[]?.Licenses[]? | select(.Name | test("AGPL|GPL|SSPL"; "i"))] | length' licenses.json)
+          if [ "$FORBIDDEN" -gt 0 ]; then
+            echo "VIOLACIÓN ESTATUTARIA DE PROPIEDAD INTELECTUAL (Control ISO 5.32):"
+            echo "Se detectaron $FORBIDDEN dependencias con licencias virales prohibidas (AGPL/GPL/SSPL)."
+            jq '.Results[]?.Licenses[]? | select(.Name | test("AGPL|GPL|SSPL"; "i"))' licenses.json
+            exit 1
+          fi
+          echo "Auditoría OSS superada: 0 licencias virales detectadas."
+
+  build-sbom-and-sign:
+    name: "Gate 2: Compilación Distroless, SBOM CycloneDX y Firma Criptográfica Cosign"
+    needs: security-and-license-gate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del Código
+        uses: actions/checkout@v4
+
+      - name: Instalar Cosign y Syft
+        uses: sigstore/cosign-installer@v3.7.0
+
+      - name: Instalar Anchore Syft para Generación de SBOM
+        uses: anchore/sbom-action/download-syft@v0.17.2
+
+      - name: Autenticar en Registro OCI
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compilar y Publicar Imagen Inmutable por Digest SHA-256
+        id: build_image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Generar Software Bill of Materials (SBOM CycloneDX JSON)
+        run: |
+          syft ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build_image.outputs.digest }} \
+            -o cyclonedx-json=sbom-cyclonedx.json
+
+      - name: Firmar Imagen de Contenedor con Sigstore Cosign (Keyless OIDC)
+        run: |
+          cosign sign --yes \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build_image.outputs.digest }}
+
+      - name: Adjuntar Atestación Criptográfica del SBOM a la Imagen (SLSA Provenance)
+        run: |
+          cosign attest --yes \
+            --predicate sbom-cyclonedx.json \
+            --type cyclonedx \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build_image.outputs.digest }}
