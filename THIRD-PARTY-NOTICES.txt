@@ -1,15 +1,15 @@
 AVISOS DE SOFTWARE DE CODIGO ABIERTO DE TERCEROS (POL-SEC-OSS-001)
-Fecha: 2026-11-07T23:53:23Z
+Fecha: 2026-11-07T23:59:35Z
 -----------------------------------------------------------------
 Paquete: go.mod (null)
 PURL: N/A
 Licencia SPDX: Ver repositorio origen
 -----------------------------------------------------------------
+Paquete: github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint (null)
+PURL: pkg:golang/github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint
+Licencia SPDX: Ver repositorio origen
+-----------------------------------------------------------------
 Paquete: github.com/lib/pq (v1.10.9)
 PURL: pkg:golang/github.com/lib/pq@v1.10.9
 Licencia SPDX: MIT
------------------------------------------------------------------
-Paquete: github.com/standard1979/saas-enterprise-blueprint (null)
-PURL: pkg:golang/github.com/standard1979/saas-enterprise-blueprint
-Licencia SPDX: Ver repositorio origen
 -----------------------------------------------------------------

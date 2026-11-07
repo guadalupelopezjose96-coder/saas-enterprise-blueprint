@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.7.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.7",
-  "serialNumber": "urn:uuid:65948faf-d509-4c7e-938e-d5aab945b129",
+  "serialNumber": "urn:uuid:08b26ec2-cdbe-4bf8-a40e-373393acc813",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-07T23:53:23+00:00",
+    "timestamp": "2026-11-07T23:59:35+00:00",
     "tools": {
       "components": [
         {
@@ -20,7 +20,7 @@
       ]
     },
     "component": {
-      "bom-ref": "4270eca7-3739-4ade-b9fc-46e09901ace8",
+      "bom-ref": "bc85a755-e473-41e5-8f5e-a3575f40db70",
       "type": "application",
       "name": ".",
       "properties": [
@@ -33,7 +33,7 @@
   },
   "components": [
     {
-      "bom-ref": "2d597e27-0cfb-400f-8dd3-16078f59d0bf",
+      "bom-ref": "f41d31e5-0177-4acd-b335-f19b8c0e1746",
       "type": "application",
       "name": "go.mod",
       "properties": [
@@ -43,6 +43,22 @@
         },
         {
           "name": "aquasecurity:trivy:Type",
+          "value": "gomod"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint",
+      "type": "library",
+      "name": "github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint",
+      "purl": "pkg:golang/github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgID",
+          "value": "github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint"
+        },
+        {
+          "name": "aquasecurity:trivy:PkgType",
           "value": "gomod"
         }
       ]
@@ -70,46 +86,30 @@
           "value": "gomod"
         }
       ]
-    },
-    {
-      "bom-ref": "pkg:golang/github.com/standard1979/saas-enterprise-blueprint",
-      "type": "library",
-      "name": "github.com/standard1979/saas-enterprise-blueprint",
-      "purl": "pkg:golang/github.com/standard1979/saas-enterprise-blueprint",
-      "properties": [
-        {
-          "name": "aquasecurity:trivy:PkgID",
-          "value": "github.com/standard1979/saas-enterprise-blueprint"
-        },
-        {
-          "name": "aquasecurity:trivy:PkgType",
-          "value": "gomod"
-        }
-      ]
     }
   ],
   "dependencies": [
     {
-      "ref": "2d597e27-0cfb-400f-8dd3-16078f59d0bf",
+      "ref": "bc85a755-e473-41e5-8f5e-a3575f40db70",
       "dependsOn": [
-        "pkg:golang/github.com/standard1979/saas-enterprise-blueprint"
+        "f41d31e5-0177-4acd-b335-f19b8c0e1746"
       ]
     },
     {
-      "ref": "4270eca7-3739-4ade-b9fc-46e09901ace8",
+      "ref": "f41d31e5-0177-4acd-b335-f19b8c0e1746",
       "dependsOn": [
-        "2d597e27-0cfb-400f-8dd3-16078f59d0bf"
+        "pkg:golang/github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint"
+      ]
+    },
+    {
+      "ref": "pkg:golang/github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint",
+      "dependsOn": [
+        "pkg:golang/github.com/lib/pq@v1.10.9"
       ]
     },
     {
       "ref": "pkg:golang/github.com/lib/pq@v1.10.9",
       "dependsOn": []
-    },
-    {
-      "ref": "pkg:golang/github.com/standard1979/saas-enterprise-blueprint",
-      "dependsOn": [
-        "pkg:golang/github.com/lib/pq@v1.10.9"
-      ]
     }
   ],
   "vulnerabilities": []

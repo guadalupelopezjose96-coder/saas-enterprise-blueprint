@@ -1,4 +1,4 @@
-module github.com/standard1979/saas-enterprise-blueprint
+module github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint
 
 go 1.22
 

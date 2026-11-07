@@ -1,13 +1,13 @@
 ==================================================================
  MANIFIESTO DE INTEGRIDAD CRIPTOGRÁFICA (SHA-256) - SAAS BLUEPRINT
- Generado en UTC: 2026-11-07T23:53:20Z
+ Generado en UTC: 2026-11-07T23:59:33Z
  Nodo de Auditoría: u0_a315@localhost
 ==================================================================
 
 854f767480ad8cc111f5553838cf885aa69b5f9fe95b3f08a37c5a56227d7ce3  /data/data/com.termux/files/home/saas-enterprise-blueprint/.github/workflows/ci-cd-slsa3-pipeline.yml
 79a93736e8867147a520cc2934483f4b4168b54695aa474cef4ac6bfedeb96df  /data/data/com.termux/files/home/saas-enterprise-blueprint/Dockerfile
 109b668d312b78027fd63c3ca2a312740dd24c6698dd98cae33e7f34ae130228  /data/data/com.termux/files/home/saas-enterprise-blueprint/README.md
-d6f6d7d90c29010ad6af637b2467daf40e901e69a8173d02b4a953640deead00  /data/data/com.termux/files/home/saas-enterprise-blueprint/THIRD-PARTY-NOTICES.txt
+2e61238a1e713518cccde2c8424337bb83e19e84d32adda53fa6cf53cf6f5f26  /data/data/com.termux/files/home/saas-enterprise-blueprint/THIRD-PARTY-NOTICES.txt
 2918decbf4fd41f6ce2a5bdf8a747cf8a96cd7e3abae0f3ee4424597eb8e2ba3  /data/data/com.termux/files/home/saas-enterprise-blueprint/cmd/api/main.go
 3e76a2034c27bf586db498d751abec831f29a9d26d2552dffb4773f60e252c91  /data/data/com.termux/files/home/saas-enterprise-blueprint/cmd/api/main_test.go
 7181ac6dfae3b5a3b66858c2b3ec5207699faa23de30e6f8f6a6f13e7918ac04  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/ISO27001_SOA_AND_IRP_BCDR_MASTER.md
@@ -15,13 +15,13 @@ d6f6d7d90c29010ad6af637b2467daf40e901e69a8173d02b4a953640deead00  /data/data/com
 dbe62734131d11d88e89102b5e25f226e386cd29ebab312779910bbf0533faa6  /data/data/com.termux/files/home/saas-enterprise-blueprint/database/02_verify_rls_isolation.sh
 84ba49444649a5b26e0810fef4f543ed875cf0c7d2e0088b745704fb988d85cf  /data/data/com.termux/files/home/saas-enterprise-blueprint/finops/asc606_revenue_engine.sql
 0a3413a4e134b830f76ea7e431aea3b7fe727835ab3890fc5596cf9d9d94c7a7  /data/data/com.termux/files/home/saas-enterprise-blueprint/generate_audit_manifest.sh
-cb79c8ce6c15662bad6330e5443187f5f9982abf27f1c70e31e2dcdf76f3c3de  /data/data/com.termux/files/home/saas-enterprise-blueprint/go.mod
+0635a8e3e55b78342990aae9822e23bf2b1d15fb243bde2234ec4d71f23e62c4  /data/data/com.termux/files/home/saas-enterprise-blueprint/go.mod
 90f48a605768fc3f5813e27cd5c63e854f07b8d1d92a5f6d7f9b9862e02ea445  /data/data/com.termux/files/home/saas-enterprise-blueprint/go.sum
 a4dfea18b5d699cfcdd1b538b4315ebe9493bb08972092dda87c066f2d0b5da8  /data/data/com.termux/files/home/saas-enterprise-blueprint/kubernetes/01_kyverno_zero_trust_policies.yaml
 500f6bf97805a2d86f4b6a335758abbc35065a5727245e405fb6a9128b63f514  /data/data/com.termux/files/home/saas-enterprise-blueprint/legal/ORDEN_DE_PEDIDO_B2B_Y_ANEXOS_BYOK_IA.md
 ad24e71be55da458b346d48b6ec9613c3d3982e9c1628d90e3451daa53ddc555  /data/data/com.termux/files/home/saas-enterprise-blueprint/legal/PAQUETE_CONTRACTUAL_MAESTRO_MSA_DPA_SLA.md
 73981b3d0d5e3decbe6e3a4b501010180189c92d89aa12756de0a3b89d6627e8  /data/data/com.termux/files/home/saas-enterprise-blueprint/observability/otel-collector-pii-redaction.yaml
-5cab449455f41b674e829f096dc8828a45d0ef50398bddb3bb37a18bc6097de4  /data/data/com.termux/files/home/saas-enterprise-blueprint/sbom-cyclonedx.json
+c71068e633c5b8646554847079f67085cba755bcac321529133a51185d985274  /data/data/com.termux/files/home/saas-enterprise-blueprint/sbom-cyclonedx.json
 31153cec16043cd79c00c4d9b437dbddd3c6cad3b484035dfc9acbbf806df454  /data/data/com.termux/files/home/saas-enterprise-blueprint/terraform/main.tf
 0a946eefbff4c4fd0ade42dfcdc7ad20b70cfd8b502d725fd4d0d7dfecafa839  /data/data/com.termux/files/home/saas-enterprise-blueprint/vendor/github.com/lib/pq/.gitignore
 3e2d79d27727d59ab1c9752f57654733d6c8824936c22800594dccfe8864ec28  /data/data/com.termux/files/home/saas-enterprise-blueprint/vendor/github.com/lib/pq/LICENSE.md
