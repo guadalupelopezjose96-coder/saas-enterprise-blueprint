@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.7.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.7",
-  "serialNumber": "urn:uuid:a3e716ec-accc-4a85-b447-dd7718b72adc",
+  "serialNumber": "urn:uuid:ecb130bb-9b18-416d-ae4d-3c7e122eb8e7",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-07T23:49:45+00:00",
+    "timestamp": "2026-11-07T23:50:46+00:00",
     "tools": {
       "components": [
         {
@@ -20,7 +20,7 @@
       ]
     },
     "component": {
-      "bom-ref": "5fbdf849-ac1e-46b5-acd1-9f8356b6aabc",
+      "bom-ref": "a5b5b034-3df9-4edf-a6e6-fa147ecb4068",
       "type": "application",
       "name": ".",
       "properties": [
@@ -33,7 +33,7 @@
   },
   "components": [
     {
-      "bom-ref": "fce6e48e-b7a0-483d-92d3-529931a6c9ef",
+      "bom-ref": "8b72f758-91f2-4674-994d-eecae800d8f8",
       "type": "application",
       "name": "go.mod",
       "properties": [
@@ -52,6 +52,13 @@
       "type": "library",
       "name": "github.com/lib/pq",
       "version": "v1.10.9",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
       "purl": "pkg:golang/github.com/lib/pq@v1.10.9",
       "properties": [
         {
@@ -83,15 +90,15 @@
   ],
   "dependencies": [
     {
-      "ref": "5fbdf849-ac1e-46b5-acd1-9f8356b6aabc",
+      "ref": "8b72f758-91f2-4674-994d-eecae800d8f8",
       "dependsOn": [
-        "fce6e48e-b7a0-483d-92d3-529931a6c9ef"
+        "pkg:golang/github.com/standard1979/saas-enterprise-blueprint"
       ]
     },
     {
-      "ref": "fce6e48e-b7a0-483d-92d3-529931a6c9ef",
+      "ref": "a5b5b034-3df9-4edf-a6e6-fa147ecb4068",
       "dependsOn": [
-        "pkg:golang/github.com/standard1979/saas-enterprise-blueprint"
+        "8b72f758-91f2-4674-994d-eecae800d8f8"
       ]
     },
     {
