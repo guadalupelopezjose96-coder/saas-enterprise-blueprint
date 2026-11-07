@@ -1,5 +1,5 @@
 AVISOS DE SOFTWARE DE CODIGO ABIERTO DE TERCEROS (POL-SEC-OSS-001)
-Fecha: 2026-11-07T23:50:46Z
+Fecha: 2026-11-07T23:53:23Z
 -----------------------------------------------------------------
 Paquete: go.mod (null)
 PURL: N/A
