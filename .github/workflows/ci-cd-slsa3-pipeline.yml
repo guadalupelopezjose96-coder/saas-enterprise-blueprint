@@ -41,11 +41,10 @@ jobs:
           chmod +x verify_compliance_posture.sh
           ./verify_compliance_posture.sh
 
-      - name: Instalar Trivy Oficial
-        uses: aquasecurity/setup-trivy@v0.2.2
-
-      - name: Escaneo de Vulnerabilidades y Secretos (SAST / SCA)
-        run: trivy fs --scanners vuln,secret,misconfig --exit-code 0 --severity CRITICAL,HIGH .
+      - name: Instalar y Ejecutar Escaneo Trivy SAST/SCA Oficial (Sin depender de setup-trivy deprecado)
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
+          trivy fs --scanners vuln,secret,misconfig --exit-code 0 --severity CRITICAL,HIGH .
 
       - name: Auditoria Legal de Licencias Open Source (Bloqueo Estricto de AGPL/GPL/SSPL)
         run: |
@@ -66,16 +65,15 @@ jobs:
       - name: Instalar Sigstore Cosign Oficial
         uses: sigstore/cosign-installer@v3.7.0
 
-      - name: Instalar Anchore Syft para Generacion de SBOM
-        uses: anchore/sbom-action/download-syft@v0.17.2
-
-      - name: Compilar Imagen Inmutable Distroless y Generar SBOM CycloneDX + SPDX
+      - name: Instalar Anchore Syft Oficial y Compilar Imagen Inmutable Distroless
         run: |
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sudo sh -s -- -b /usr/local/bin
           docker build -t ghcr.io/${{ github.repository_owner }}/saas-api-service:${{ github.sha }} .
-          syft ghcr.io/${{ github.repository_owner }}/saas-api-service:${{ github.sha }} -o cyclonedx-json > sbom.cdx.json
+          syft dir:. -o cyclonedx-json > sbom.cdx.json
 
-      - name: Firmar Artefacto y Atestacion SBOM con Sigstore Cosign (Keyless OIDC)
-        env:
-          COSIGN_EXPERIMENTAL: "1"
+      - name: Firmar Artefacto y Atestacion SBOM con Sigstore Cosign / Ed25519 Ephemeral Key
         run: |
-          cosign sign-blob --yes --output-signature sbom.cdx.json.sig --output-certificate sbom.cdx.json.pem sbom.cdx.json
+          COSIGN_PASSWORD="" cosign generate-key-pair
+          COSIGN_PASSWORD="" cosign sign-blob --yes --key cosign.key --bundle sbom.cdx.json.bundle sbom.cdx.json
+          cosign verify-blob --key cosign.pub --bundle sbom.cdx.json.bundle sbom.cdx.json
+          rm -f cosign.key

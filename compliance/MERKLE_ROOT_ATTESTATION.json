@@ -2,5 +2,5 @@
   "standard": "IETF RFC 6962 Binary Merkle Tree Transparency Log",
   "control_id": "MRK-01",
   "verified_leaf_artifacts": 108,
-  "merkle_root_sha256": "ed064b98dc48b418e58e71f835dcde6f4d5f71819e47429e407bf85c9675dda9"
+  "merkle_root_sha256": "06d85e0585f6e779cf1ecc15d38139e4739b9a1666c71aa91c88b1d81ff6cadc"
 }
