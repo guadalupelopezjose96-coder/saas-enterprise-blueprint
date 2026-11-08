@@ -12,10 +12,14 @@ permissions:
   id-token: write
   security-events: write
 
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: \"true\"
+
 jobs:
   security-compliance-and-license-gate:
     name: "Gate 1: Auditoria de 60/60 Controles, 36 Fases, Licencia Comercial, Merkle RFC 6962, DLP y Go Fuzz/Tests"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout Inmutable del Codigo Fuente
         uses: actions/checkout@v4
@@ -52,7 +56,7 @@ jobs:
   build-sbom-and-cosign-attestation:
     name: "Gate 2: Compilacion Distroless, SBOM Dual (CycloneDX + SPDX 2.3) y Firma Criptografica"
     needs: security-compliance-and-license-gate
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout del Codigo
         uses: actions/checkout@v4
