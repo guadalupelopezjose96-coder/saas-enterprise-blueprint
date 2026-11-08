@@ -22,12 +22,14 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout Inmutable del Codigo Fuente
-        uses: actions/checkout@v4
+        run: |
+          git init .
+          git remote add origin https://github.com/${{ github.repository }}.git || git remote set-url origin https://github.com/${{ github.repository }}.git
+          git fetch --no-tags --prune --depth=1 origin ${{ github.sha }}
+          git checkout --force ${{ github.sha }}
 
       - name: Configurar Entorno Go (ISO 8.29)
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.22'
+        run: go version
 
       - name: Ejecutar Suite de Pruebas Unitarias y Semillas de Fuzzing en Go
         run: go test -v -race ./cmd/api/...
@@ -59,7 +61,11 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout del Codigo
-        uses: actions/checkout@v4
+        run: |
+          git init .
+          git remote add origin https://github.com/${{ github.repository }}.git || git remote set-url origin https://github.com/${{ github.repository }}.git
+          git fetch --no-tags --prune --depth=1 origin ${{ github.sha }}
+          git checkout --force ${{ github.sha }}
 
       - name: Compilar Imagen Inmutable Distroless y Verificar SBOM Dual (CycloneDX + SPDX 2.3)
         run: |
