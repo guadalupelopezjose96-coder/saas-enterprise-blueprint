@@ -1,6 +1,6 @@
 ==================================================================
  MANIFIESTO DE INTEGRIDAD CRIPTOGRÁFICA (SHA-256) - SAAS BLUEPRINT
- Generado en UTC: 2026-11-08T00:58:30Z
+ Generado en UTC: 2026-11-08T01:00:44Z
  Nodo de Auditoría: u0_a315@localhost
 ==================================================================
 
@@ -10,7 +10,7 @@
 6a042dc3d946a90e425e160952639f9defcc36b8e20cb4cd30c7e5a464a68f5c  /data/data/com.termux/files/home/saas-enterprise-blueprint/Dockerfile
 18e3cda08018f8b801c6004e278b9abf9633b1ad78006de1b3c4e2e41861de24  /data/data/com.termux/files/home/saas-enterprise-blueprint/README.md
 6eef7c28c522a09faccb0a08aa154e1b5581bc0b2c1824c98d39955357e3a0e3  /data/data/com.termux/files/home/saas-enterprise-blueprint/SECURITY.md
-af68f80dee6c114c4e101a46636c56966d413a10228e687f7ffebc83f5616d91  /data/data/com.termux/files/home/saas-enterprise-blueprint/THIRD-PARTY-NOTICES.txt
+d117c9a8dd6101fcf116c0ecb06b0f496ef3e449b5a44d133e29ae29d643b57d  /data/data/com.termux/files/home/saas-enterprise-blueprint/THIRD-PARTY-NOTICES.txt
 11940733a6edb006736b375f43d1b3fd7986bbe2df4e12d2b1474d770bcca7ed  /data/data/com.termux/files/home/saas-enterprise-blueprint/ai_governance/01_eu_ai_act_audit_ledger.sql
 e33758c56b83d29af409dd0b2a8e8238bc0edfcc3a8100cfc894329c51c4667b  /data/data/com.termux/files/home/saas-enterprise-blueprint/api/openapi-v3.1-spec.yaml
 6291018ff255f7a0160e3bd49c0b5d150ff8bd95f327c905e6a9fb411ff1fa0c  /data/data/com.termux/files/home/saas-enterprise-blueprint/chaos/simulate_region_failover_drill.sh
@@ -39,7 +39,7 @@ a4dfea18b5d699cfcdd1b538b4315ebe9493bb08972092dda87c066f2d0b5da8  /data/data/com
 ad24e71be55da458b346d48b6ec9613c3d3982e9c1628d90e3451daa53ddc555  /data/data/com.termux/files/home/saas-enterprise-blueprint/legal/PAQUETE_CONTRACTUAL_MAESTRO_MSA_DPA_SLA.md
 73981b3d0d5e3decbe6e3a4b501010180189c92d89aa12756de0a3b89d6627e8  /data/data/com.termux/files/home/saas-enterprise-blueprint/observability/otel-collector-pii-redaction.yaml
 1367e7ab68dc4a9044f72a6a4dc640a09d7acc5a3e28fad8761da4c2032dcc0a  /data/data/com.termux/files/home/saas-enterprise-blueprint/portability/export_tenant_portable_bundle.sh
-018239dbda470bcf4fb12c2df517aceceff343da8c071a96bafa02ea72cfad3f  /data/data/com.termux/files/home/saas-enterprise-blueprint/sbom-cyclonedx.json
+c79d14a8ecf891403e1191735627618bedad92f5e5520dd35d066614e91ba480  /data/data/com.termux/files/home/saas-enterprise-blueprint/sbom-cyclonedx.json
 fd42ecc2ed66a3ae60525c28f666982c499c144413148136351f9a86428a1773  /data/data/com.termux/files/home/saas-enterprise-blueprint/security/01_post_quantum_tls_fips203.conf
 8d1a1be312dd90f12f7d42744b11db2830742dfff2c65de6586fadce3d989953  /data/data/com.termux/files/home/saas-enterprise-blueprint/security/02_opa_terraform_guardrails.rego
 0b2c30802805b1291e10d85379eae3515c32cab3f205d34d59fbe8bc47bcc104  /data/data/com.termux/files/home/saas-enterprise-blueprint/security/03_confidential_computing_enclave_attestation.json
