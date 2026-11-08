@@ -1,0 +1,21 @@
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: enforce-distroless-immutable-runtime-ebpf
+  annotations:
+    compliance.saas.io/standard: "SOC 2 CC6.8 | ISO/IEC 27001:2022 A.8.7 & A.8.16 | Control BPF-01"
+spec:
+  kprobes:
+    - call: "sys_execve"
+      syscall: true
+      args:
+        - index: 0
+          type: "string"
+      selectors:
+        - matchArgs:
+            - index: 0
+              operator: "NotEqual"
+              values:
+                - "/saas-api-service"
+          matchActions:
+            - action: Sigkill
