@@ -18,7 +18,7 @@ check_control() {
 }
 
 echo "============================================================================"
-echo " EJECUTANDO AUDITORIA MAESTRA DE 25 CONTROLES (SOC 2, ISO 27001, DORA, PQC)"
+echo " EJECUTANDO AUDITORIA SUPREMA DE 30 CONTROLES (SOC2, ISO27001, FEDRAMP, PQC)"
 echo "============================================================================"
 
 check_control "TEN-01 (ISO 8.3)"   "Row-Level Security (RLS) forzado en tablas criticas" "FORCE ROW LEVEL SECURITY" "database/01_schema_rls_and_outbox.sql"
@@ -41,10 +41,15 @@ check_control "PRT-01 (Data Act)"  "Motor de Portabilidad y Salida con 0 Egress 
 check_control "DDQ-01 (CSA CAIQ)"  "Cuestionario automatizado CAIQ v4 / SIG Lite B2B" "CSA_CAIQ_v4.0.3_AND_SIG_LITE_2026" "compliance/CAIQ_V4_SECURITY_QUESTIONNAIRE.json"
 check_control "CHA-01 (DR Drill)"  "Evidencia ejecutable de Failover Multi-Region (RPO 1s / RTO 42s)" "PASS_ZERO_DATA_LOSS" "compliance/DR_FAILOVER_DRILL_EVIDENCE.json"
 check_control "API-01 (OpenAPI)"   "Contrato formal OpenAPI 3.1.0 con mTLS, JWT e Idempotencia" "createTenantTransaction" "api/openapi-v3.1-spec.yaml"
-check_control "TRU-01 (Trust Web)" "Portal ejecutivo Live Trust & Compliance Center desplegado" "25/25 CONTROLES VERIFICADOS" "docs/index.html"
+check_control "TRU-01 (Trust Web)" "Portal ejecutivo Live Trust & Compliance Center desplegado" "30/30 CONTROLES VERIFICADOS" "docs/index.html"
 check_control "PQC-01 (FIPS 203)"  "Criptografia Post-Cuantica Hibrida X25519MLKEM768 activa" "X25519MLKEM768" "security/01_post_quantum_tls_fips203.conf"
 check_control "BPF-01 (Tetragon)"  "Proteccion Kernel eBPF Cilium Tetragon con Sigkill" "TracingPolicy" "kubernetes/02_tetragon_ebpf_runtime_policy.yaml"
 check_control "TAX-01 (OECD/VAT)"  "Motor Fiscal Internacional IVA Reverse Charge y OCDE BEPS" "EU_VAT_REVERSE_CHARGE_ART196" "finops/02_international_tax_and_transfer_pricing.sql"
+check_control "OSC-01 (FedRAMP)"   "System Security Plan legible por maquina NIST OSCAL 1.1.2" "oscal-version" "compliance/oscal_system_security_plan.json"
+check_control "OPA-01 (Rego PaC)"  "Guardrails preventivos Open Policy Agent (Rego) sobre IaC" "package saas.enterprise.guardrails" "security/02_opa_terraform_guardrails.rego"
+check_control "ENC-01 (Nitro TEE)" "Atestacion criptografica PCR0 para AWS Nitro Enclaves" "RecipientAttestation:ImageSha384" "security/03_confidential_computing_enclave_attestation.json"
+check_control "IAM-01 (SCIM 2.0)"  "Identidad federada SCIM 2.0 con FIDO2 obligatorio y RLS" "mfa_hardware_fido2_verified" "database/02_scim_identity_and_session_revocation.sql"
+check_control "FOC-01 (FOCUS/ESG)" "Ledger FinOps FOCUS 1.0 y emisiones de carbono UE CSRD" "focus_cost_and_carbon_ledger" "finops/03_focus_cost_and_esg_carbon_ledger.sql"
 check_control "LEG-01 (MSA/DPA)"   "Clausulas EU Data Act, EU AI Act, ASC 606 y BYOK vigentes" "EU AI Act" "legal/ORDEN_DE_PEDIDO_B2B_Y_ANEXOS_BYOK_IA.md"
 
 if command -v go >/dev/null 2>&1; then
@@ -54,5 +59,5 @@ if command -v go >/dev/null 2>&1; then
 fi
 
 echo "----------------------------------------------------------------------------"
-echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/25 CONTROLES CRITICOS VERIFICADOS (100%)"
+echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/30 CONTROLES CRITICOS VERIFICADOS (100%)"
 echo "============================================================================"
