@@ -13,9 +13,6 @@ permissions:
   security-events: write
 
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
-
 jobs:
   security-compliance-and-license-gate:
     name: "Gate 1: Auditoria de 60/60 Controles, 36 Fases, Licencia Comercial, Merkle RFC 6962, DLP y Go Fuzz/Tests"
