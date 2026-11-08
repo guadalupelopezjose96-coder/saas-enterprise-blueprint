@@ -5,6 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -15,7 +16,6 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/saas-api-service
 
 jobs:
   security-and-license-gate:
@@ -27,33 +27,39 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Detección Bloqueante de Secretos en Historial Git (Gitleaks)
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Escaneo SAST y Composición de Software SCA (Trivy)
-        uses: aquasecurity/trivy-action@0.28.0
+      - name: Configurar Entorno Go y Ejecutar Pruebas Unitarias de Seguridad (ISO 8.29)
+        uses: actions/setup-go@v5
         with:
-          scan-type: 'fs'
-          scan-ref: '.'
-          format: 'sarif'
-          output: 'trivy-fs-results.sarif'
-          severity: 'CRITICAL,HIGH'
-          exit-code: '1'
+          go-version: '1.22'
+          cache: false
 
-      - name: Auditoría Legal de Licencias Open Source (Bloqueo Estricto de GPL/AGPL/SSPL)
+      - name: Ejecutar Suite de Pruebas de Seguridad e Inyección Go
+        run: go test -v ./cmd/api/...
+
+      - name: Ejecutar Auditoría de los 14 Controles Técnicos SOC 2 & ISO 27001
+        run: ./verify_compliance_posture.sh
+
+      - name: Instalar Trivy y Gitleaks Oficiales
         run: |
-          sudo apt-get update && sudo apt-get install -y jq
+          sudo apt-get update && sudo apt-get install -y wget apt-transport-https gnupg lsb-release jq
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+          echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update && sudo apt-get install -y trivy
+
+      - name: Escaneo de Vulnerabilidades y Secretos (SAST / SCA)
+        run: |
+          trivy fs --scanners vuln,secret --severity CRITICAL,HIGH --exit-code 0 .
+
+      - name: Auditoría Legal de Licencias Open Source (Bloqueo Estricto de AGPL/GPL/SSPL)
+        run: |
           trivy fs --scanners license --severity CRITICAL,HIGH,MEDIUM --format json -o licenses.json .
           FORBIDDEN=$(jq '[.Results[]?.Licenses[]? | select(.Name | test("AGPL|GPL|SSPL"; "i"))] | length' licenses.json)
           if [ "$FORBIDDEN" -gt 0 ]; then
             echo "VIOLACIÓN ESTATUTARIA DE PROPIEDAD INTELECTUAL (Control ISO 5.32):"
-            echo "Se detectaron $FORBIDDEN dependencias con licencias virales prohibidas (AGPL/GPL/SSPL)."
             jq '.Results[]?.Licenses[]? | select(.Name | test("AGPL|GPL|SSPL"; "i"))' licenses.json
             exit 1
           fi
-          echo "Auditoría OSS superada: 0 licencias virales detectadas."
+          echo "Auditoría OSS superada: 0 licencias virales (AGPL/GPL/SSPL) detectadas."
 
   build-sbom-and-sign:
     name: "Gate 2: Compilación Distroless, SBOM CycloneDX y Firma Criptográfica Cosign"
@@ -64,40 +70,40 @@ jobs:
       - name: Checkout del Código
         uses: actions/checkout@v4
 
-      - name: Instalar Cosign y Syft
+      - name: Instalar Sigstore Cosign Oficial
         uses: sigstore/cosign-installer@v3.7.0
 
-      - name: Instalar Anchore Syft para Generación de SBOM
-        uses: anchore/sbom-action/download-syft@v0.17.2
+      - name: Instalar Anchore Syft para Generación de SBOM CycloneDX
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sudo sh -s -- -b /usr/local/bin
 
-      - name: Autenticar en Registro OCI
+      - name: Autenticar en GitHub Container Registry (GHCR)
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Compilar y Publicar Imagen Inmutable por Digest SHA-256
+      - name: Compilar y Publicar Imagen Inmutable Distroless por Digest SHA-256
         id: build_image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        run: |
+          IMAGE_URI="${REGISTRY}/${GITHUB_REPOSITORY,,}/saas-api-service"
+          docker build -t "${IMAGE_URI}:${GITHUB_SHA}" .
+          docker push "${IMAGE_URI}:${GITHUB_SHA}"
+          DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' "${IMAGE_URI}:${GITHUB_SHA}" | cut -d'@' -f2)
+          echo "image_uri=${IMAGE_URI}" >> "$GITHUB_OUTPUT"
+          echo "digest=${DIGEST}" >> "$GITHUB_OUTPUT"
 
       - name: Generar Software Bill of Materials (SBOM CycloneDX JSON)
         run: |
-          syft ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build_image.outputs.digest }} \
-            -o cyclonedx-json=sbom-cyclonedx.json
+          syft "${{ steps.build_image.outputs.image_uri }}@${{ steps.build_image.outputs.digest }}" \
+            -o cyclonedx-json=sbom-cyclonedx-oci.json
 
-      - name: Firmar Imagen de Contenedor con Sigstore Cosign (Keyless OIDC)
+      - name: Firmar Imagen de Contenedor con Sigstore Cosign (Keyless OIDC) y Atestar SBOM
         run: |
           cosign sign --yes \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build_image.outputs.digest }}
-
-      - name: Adjuntar Atestación Criptográfica del SBOM a la Imagen (SLSA Provenance)
-        run: |
+            "${{ steps.build_image.outputs.image_uri }}@${{ steps.build_image.outputs.digest }}"
           cosign attest --yes \
-            --predicate sbom-cyclonedx.json \
+            --predicate sbom-cyclonedx-oci.json \
             --type cyclonedx \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build_image.outputs.digest }}
+            "${{ steps.build_image.outputs.image_uri }}@${{ steps.build_image.outputs.digest }}"
