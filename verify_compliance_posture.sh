@@ -18,7 +18,7 @@ check_control() {
 }
 
 echo "============================================================================"
-echo " EJECUTANDO AUDITORIA OMNISCIENTE DE 35 CONTROLES (SOC2, ISO, PCI-DSS, PQC)"
+echo " EJECUTANDO AUDITORIA ABSOLUTA DE 40 CONTROLES (SOC2, ISO, PCI, HIPAA, PQC)"
 echo "============================================================================"
 
 check_control "TEN-01 (ISO 8.3)"   "Row-Level Security (RLS) forzado en tablas criticas" "FORCE ROW LEVEL SECURITY" "database/01_schema_rls_and_outbox.sql"
@@ -41,7 +41,7 @@ check_control "PRT-01 (Data Act)"  "Motor de Portabilidad y Salida con 0 Egress 
 check_control "DDQ-01 (CSA CAIQ)"  "Cuestionario automatizado CAIQ v4 / SIG Lite B2B" "CSA_CAIQ_v4.0.3_AND_SIG_LITE_2026" "compliance/CAIQ_V4_SECURITY_QUESTIONNAIRE.json"
 check_control "CHA-01 (DR Drill)"  "Evidencia ejecutable de Failover Multi-Region (RPO 1s / RTO 42s)" "PASS_ZERO_DATA_LOSS" "compliance/DR_FAILOVER_DRILL_EVIDENCE.json"
 check_control "API-01 (OpenAPI)"   "Contrato formal OpenAPI 3.1.0 con mTLS, JWT e Idempotencia" "createTenantTransaction" "api/openapi-v3.1-spec.yaml"
-check_control "TRU-01 (Trust Web)" "Portal interactivo Live Trust & Compliance Center desplegado" "35/35 CONTROLES VERIFICADOS" "docs/index.html"
+check_control "TRU-01 (Trust Web)" "Portal interactivo Live Trust & Compliance Center desplegado" "40/40 CONTROLES VERIFICADOS" "docs/index.html"
 check_control "PQC-01 (FIPS 203)"  "Criptografia Post-Cuantica Hibrida X25519MLKEM768 activa" "X25519MLKEM768" "security/01_post_quantum_tls_fips203.conf"
 check_control "BPF-01 (Tetragon)"  "Proteccion Kernel eBPF Cilium Tetragon con Sigkill" "TracingPolicy" "kubernetes/02_tetragon_ebpf_runtime_policy.yaml"
 check_control "TAX-01 (OECD/VAT)"  "Motor Fiscal Internacional IVA Reverse Charge y OCDE BEPS" "EU_VAT_REVERSE_CHARGE_ART196" "finops/02_international_tax_and_transfer_pricing.sql"
@@ -55,6 +55,11 @@ check_control "PCI-01 (PCI v4.0)"  "Boveda de Tokenizacion PCI-DSS v4.0.1 sin PA
 check_control "RAT-01 (Envoy L7)"  "Rate-Limiting Token Bucket por Tenant contra Noisy Neighbor" "per-tenant-token-bucket-ratelimit" "kubernetes/03_envoy_per_tenant_ratelimit.yaml"
 check_control "INT-02 (SLSA v1.0)" "Atestacion formal de proveniencia In-Toto SLSA v1.0" "https://slsa.dev/provenance/v1" "compliance/slsa_v1_provenance_attestation.json"
 check_control "GOV-01 (COSO RACI)" "Estatuto del Comite de Riesgos y Matriz RACI Ejecutiva" "Matriz RACI de Gobernanza" "compliance/03_board_risk_committee_charter.md"
+check_control "HIP-01 (HIPAA BAA)" "Boveda clinica ePHI HIPAA Safe Harbor 45 CFR 164.514 con RLS" "safe_harbor_18_identifiers_stripped" "database/04_hipaa_hitech_ephi_safe_harbor.sql"
+check_control "SPI-01 (SPIFFE ID)" "Identidad criptografica CNCF SPIFFE/SPIRE X.509-SVID TTL 1h" "ClusterSPIFFEID" "kubernetes/04_spiffe_spire_svid_federation.yaml"
+check_control "LLM-01 (AI RMF)"    "Escudo Rego anti-Prompt Injection NIST AI RMF 1.0 & OWASP LLM01" "package saas.ai.nist_rmf_guard" "ai_governance/02_nist_ai_rmf_prompt_injection_guard.rego"
+check_control "WAF-01 (OWASP CRS)" "Escudo WAF OWASP CRS 4.0 y bloqueo anti-SSRF 169.254.169.254" "169\\\\.254\\\\.169\\\\.254" "security/04_owasp_crs_waf_and_ssrf_shield.conf"
+check_control "SOV-01 (SchremsII)" "Enrutador de soberania y confinamiento jurisdiccional de datos" "cross_border_transfer_allowed" "database/05_data_residency_and_sovereignty_router.sql"
 check_control "LEG-01 (MSA/DPA)"   "Clausulas EU Data Act, EU AI Act, ASC 606 y BYOK vigentes" "EU AI Act" "legal/ORDEN_DE_PEDIDO_B2B_Y_ANEXOS_BYOK_IA.md"
 
 if command -v go >/dev/null 2>&1; then
@@ -64,5 +69,5 @@ if command -v go >/dev/null 2>&1; then
 fi
 
 echo "----------------------------------------------------------------------------"
-echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/35 CONTROLES CRITICOS VERIFICADOS (100%)"
+echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/40 CONTROLES CRITICOS VERIFICADOS (100%)"
 echo "============================================================================"

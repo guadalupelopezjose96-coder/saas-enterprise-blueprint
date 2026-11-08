@@ -1,0 +1,14 @@
+apiVersion: spire.spiffe.io/v1alpha1
+kind: ClusterSPIFFEID
+metadata:
+  name: saas-api-zero-trust-workload-identity
+  annotations:
+    compliance.saas.io/standard: "NIST SP 800-207 Zero Trust | ISO 27001 A.8.5 | Control SPI-01"
+spec:
+  spiffeIDTemplate: "spiffe://saas-enterprise.internal/ns/{{ .PodMeta.Namespace }}/sa/{{ .PodSpec.ServiceAccountName }}"
+  podSelector:
+    matchLabels:
+      app: saas-api-service
+  jwtTtl: 15m
+  x509SvidTtl: 1h
+  autoPopulateDNSNames: true
