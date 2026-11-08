@@ -1,0 +1,65 @@
+openapi: 3.1.0
+info:
+  title: Enterprise SaaS B2B Multi-Tenant Core Ledger API
+  version: 4.0.0
+  description: API financiera B2B con aislamiento PostgreSQL RLS, Idempotencia estricta y cumplimiento SOC 2 Tipo II / ISO 27001:2022 / ASC 606.
+  contact:
+    name: Security & GRC Architecture Team
+servers:
+  - url: https://api.saas-enterprise.internal:8443
+    description: Production Zero-Trust Istio mTLS Gateway
+security:
+  - mtlsAuth: []
+    bearerJwt: []
+paths:
+  /v1/transactions:
+    post:
+      summary: Registrar transaccion financiera atomica con Outbox e Idempotencia
+      operationId: createTenantTransaction
+      parameters:
+        - name: X-Tenant-ID
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+            minLength: 16
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [operation_type, amount_cents, currency]
+              properties:
+                operation_type:
+                  type: string
+                  enum: [SUBSCRIPTION, METERED_USAGE, CREDIT_ADJUSTMENT]
+                amount_cents:
+                  type: integer
+                  minimum: 1
+                currency:
+                  type: string
+                  minLength: 3
+                  maxLength: 3
+      responses:
+        '201':
+          description: Transaccion comiteada con aislamiento RLS y evento Outbox encolado
+        '400':
+          description: Violacion de contrato de seguridad o falta de X-Tenant-ID / Idempotency-Key
+        '429':
+          description: Limite de tasa por Tenant excedido (Proteccion DDoS / Noisy Neighbor)
+components:
+  securitySchemes:
+    mtlsAuth:
+      type: mutualTLS
+    bearerJwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
