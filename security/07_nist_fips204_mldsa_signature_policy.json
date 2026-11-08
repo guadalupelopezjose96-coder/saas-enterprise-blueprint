@@ -1,0 +1,15 @@
+{
+  "standard": "NIST FIPS 204 (Module-Lattice-Based Digital Signature Standard - ML-DSA)",
+  "control_id": "PQC-02",
+  "cnsa_2_0_compliance": true,
+  "signature_algorithm_suite": {
+    "primary_pqc_algorithm": "ML-DSA-87 (CRYSTALS-Dilithium5 / NIST Security Category 5)",
+    "hybrid_classical_algorithm": "Ed25519 (RFC 8032)",
+    "hash_function": "SHAKE256 / SHA3-512 (NIST FIPS 202)"
+  },
+  "enforcement_scope": [
+    "Root CA & Intermediate mTLS Certificates",
+    "Long-Term Audit Archive Bundles (WORM 10-Year Retention)",
+    "Legal Hold eDiscovery Cryptographic Time-Stamps (RFC 3161)"
+  ]
+}

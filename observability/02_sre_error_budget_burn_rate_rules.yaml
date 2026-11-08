@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: saas-sre-slo-error-budget-burn-rate
+  namespace: saas-production
+  annotations:
+    compliance.saas.io/standard: "SOC 2 A1.1 | ISO/IEC 27001:2022 A.8.16 | Control CHA-02"
+spec:
+  groups:
+    - name: slo-99.95-availability-burn-rate
+      rules:
+        - alert: SaaSErrorBudgetFastBurnCritical
+          expr: |
+            (
+              rate(http_requests_total{status=~"5.."}[1h])
+              /
+              rate(http_requests_total[1h])
+            ) > (14.4 * (1 - 0.9995))
+          for: 2m
+          labels:
+            severity: page_critical
+            slo_target: "99.95_percent"
+            action: "freeze_non_security_deployments_and_trigger_auto_rollback"
+          annotations:
+            summary: "Consumo critico de Error Budget (14.4x Burn Rate): Proteccion automatica de SLA 99.95% activada."

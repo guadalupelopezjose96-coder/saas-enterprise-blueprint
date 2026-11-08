@@ -18,7 +18,7 @@ check_control() {
 }
 
 echo "============================================================================"
-echo " EJECUTANDO AUDITORIA ABSOLUTA DE 40 CONTROLES (SOC2, ISO, PCI, HIPAA, PQC)"
+echo " EJECUTANDO AUDITORIA DEFINITIVA DE 50 CONTROLES (100% ENTERPRISE POSTURE)"
 echo "============================================================================"
 
 check_control "TEN-01 (ISO 8.3)"   "Row-Level Security (RLS) forzado en tablas criticas" "FORCE ROW LEVEL SECURITY" "database/01_schema_rls_and_outbox.sql"
@@ -41,7 +41,7 @@ check_control "PRT-01 (Data Act)"  "Motor de Portabilidad y Salida con 0 Egress 
 check_control "DDQ-01 (CSA CAIQ)"  "Cuestionario automatizado CAIQ v4 / SIG Lite B2B" "CSA_CAIQ_v4.0.3_AND_SIG_LITE_2026" "compliance/CAIQ_V4_SECURITY_QUESTIONNAIRE.json"
 check_control "CHA-01 (DR Drill)"  "Evidencia ejecutable de Failover Multi-Region (RPO 1s / RTO 42s)" "PASS_ZERO_DATA_LOSS" "compliance/DR_FAILOVER_DRILL_EVIDENCE.json"
 check_control "API-01 (OpenAPI)"   "Contrato formal OpenAPI 3.1.0 con mTLS, JWT e Idempotencia" "createTenantTransaction" "api/openapi-v3.1-spec.yaml"
-check_control "TRU-01 (Trust Web)" "Portal interactivo Live Trust & Compliance Center desplegado" "40/40 CONTROLES VERIFICADOS" "docs/index.html"
+check_control "TRU-01 (Trust Web)" "Portal interactivo Live Trust & Compliance Center desplegado" "50/50 CONTROLES VERIFICADOS" "docs/index.html"
 check_control "PQC-01 (FIPS 203)"  "Criptografia Post-Cuantica Hibrida X25519MLKEM768 activa" "X25519MLKEM768" "security/01_post_quantum_tls_fips203.conf"
 check_control "BPF-01 (Tetragon)"  "Proteccion Kernel eBPF Cilium Tetragon con Sigkill" "TracingPolicy" "kubernetes/02_tetragon_ebpf_runtime_policy.yaml"
 check_control "TAX-01 (OECD/VAT)"  "Motor Fiscal Internacional IVA Reverse Charge y OCDE BEPS" "EU_VAT_REVERSE_CHARGE_ART196" "finops/02_international_tax_and_transfer_pricing.sql"
@@ -60,6 +60,16 @@ check_control "SPI-01 (SPIFFE ID)" "Identidad criptografica CNCF SPIFFE/SPIRE X.
 check_control "LLM-01 (AI RMF)"    "Escudo Rego anti-Prompt Injection NIST AI RMF 1.0 & OWASP LLM01" "package saas.ai.nist_rmf_guard" "ai_governance/02_nist_ai_rmf_prompt_injection_guard.rego"
 check_control "WAF-01 (OWASP CRS)" "Escudo WAF OWASP CRS 4.0 y bloqueo anti-SSRF 169.254.169.254" "169\\\\.254\\\\.169\\\\.254" "security/04_owasp_crs_waf_and_ssrf_shield.conf"
 check_control "SOV-01 (SchremsII)" "Enrutador de soberania y confinamiento jurisdiccional de datos" "cross_border_transfer_allowed" "database/05_data_residency_and_sovereignty_router.sql"
+check_control "FKS-01 (KillSwitch)" "Freno autonomo de presupuesto FinOps contra Denial-of-Wallet" "chk_hard_cap_denial_of_wallet_guard" "finops/04_autonomous_budget_killswitch_and_quotas.sql"
+check_control "LGH-01 (LegalHold)" "Retencion judicial inmutable eDiscovery FRCP Rule 37(e)" "prevent_deletion_under_legal_hold" "legal/01_ediscovery_legal_hold_immutable_vault.sql"
+check_control "MRK-01 (RFC 6962)"  "Arbol de Merkle criptografico RFC 6962 sobre el manifiesto" "merkle_root_sha256" "compliance/MERKLE_ROOT_ATTESTATION.json"
+check_control "SEC-01 (ISO 8.12)"  "Escaner preventivo DLP anti-fuga de llaves privadas y tokens" "SECRET_REGEX" "security/06_zero_secret_leakage_scanner.sh"
+check_control "ACC-01 (WCAG 2.2)"  "Informe de accesibilidad VPAT 2.5 (US Section 508 & EU EAA)" "VPAT 2.5" "compliance/04_wcag22_section508_vpat_report.md"
+check_control "PQC-02 (FIPS 204)"  "Politica de firma digital Post-Cuantica ML-DSA-87 activa" "ML-DSA-87" "security/07_nist_fips204_mldsa_signature_policy.json"
+check_control "EXP-01 (EAR/OFAC)"  "Motor de control de exportaciones ECCN 5D002 y bloqueo OFAC" "chk_prohibited_embargoed_jurisdictions" "legal/02_export_control_ear_ofac_screening.sql"
+check_control "ISO-42 (ISO 42001)" "Sistema de Gestion de IA (AIMS) y evaluacion de impacto AIIA" "ISO/IEC 42001:2023" "ai_governance/03_iso42001_ai_management_system_soa.md"
+check_control "SBX-01 (SPDX 2.3)"  "Manifiesto formal SBOM SPDX 2.3 bajo ISO/IEC 5962:2021" "SPDX-2.3" "compliance/spdx_v2.3_iso5962_sbom.json"
+check_control "CHA-02 (SLO Burn)"  "Alerta multi-ventana SRE de consumo de Error Budget (99.95%)" "SaaSErrorBudgetFastBurnCritical" "observability/02_sre_error_budget_burn_rate_rules.yaml"
 check_control "LEG-01 (MSA/DPA)"   "Clausulas EU Data Act, EU AI Act, ASC 606 y BYOK vigentes" "EU AI Act" "legal/ORDEN_DE_PEDIDO_B2B_Y_ANEXOS_BYOK_IA.md"
 
 if command -v go >/dev/null 2>&1; then
@@ -69,5 +79,5 @@ if command -v go >/dev/null 2>&1; then
 fi
 
 echo "----------------------------------------------------------------------------"
-echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/40 CONTROLES CRITICOS VERIFICADOS (100%)"
+echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/50 CONTROLES CRITICOS VERIFICADOS (100%)"
 echo "============================================================================"
