@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
   packages: write
   security-events: write
@@ -39,7 +39,7 @@ jobs:
       - name: Ejecutar Auditoría de los 14 Controles Técnicos SOC 2 & ISO 27001
         run: ./verify_compliance_posture.sh
 
-      - name: Instalar Trivy y Gitleaks Oficiales
+      - name: Instalar Trivy Oficial
         run: |
           sudo apt-get update && sudo apt-get install -y wget apt-transport-https gnupg lsb-release jq
           wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
@@ -84,26 +84,26 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Compilar y Publicar Imagen Inmutable Distroless por Digest SHA-256
+      - name: Compilar Imagen Inmutable Distroless y Generar SBOM CycloneDX
         id: build_image
         run: |
-          IMAGE_URI="${REGISTRY}/${GITHUB_REPOSITORY,,}/saas-api-service"
+          OWNER_LC=$(echo "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_URI="${REGISTRY}/${OWNER_LC}/saas-api-service"
           docker build -t "${IMAGE_URI}:${GITHUB_SHA}" .
-          docker push "${IMAGE_URI}:${GITHUB_SHA}"
-          DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' "${IMAGE_URI}:${GITHUB_SHA}" | cut -d'@' -f2)
+          syft "docker:${IMAGE_URI}:${GITHUB_SHA}" -o cyclonedx-json=sbom-cyclonedx-oci.json
+          docker save "${IMAGE_URI}:${GITHUB_SHA}" -o saas-api-service-oci.tar
           echo "image_uri=${IMAGE_URI}" >> "$GITHUB_OUTPUT"
-          echo "digest=${DIGEST}" >> "$GITHUB_OUTPUT"
 
-      - name: Generar Software Bill of Materials (SBOM CycloneDX JSON)
+      - name: Firmar Artefacto OCI y Atestación SBOM con Sigstore Cosign (Keyless OIDC)
         run: |
-          syft "${{ steps.build_image.outputs.image_uri }}@${{ steps.build_image.outputs.digest }}" \
-            -o cyclonedx-json=sbom-cyclonedx-oci.json
-
-      - name: Firmar Imagen de Contenedor con Sigstore Cosign (Keyless OIDC) y Atestar SBOM
-        run: |
-          cosign sign --yes \
-            "${{ steps.build_image.outputs.image_uri }}@${{ steps.build_image.outputs.digest }}"
-          cosign attest --yes \
-            --predicate sbom-cyclonedx-oci.json \
-            --type cyclonedx \
-            "${{ steps.build_image.outputs.image_uri }}@${{ steps.build_image.outputs.digest }}"
+          cosign sign-blob --yes \
+            --bundle cosign-image.bundle \
+            saas-api-service-oci.tar
+          cosign sign-blob --yes \
+            --bundle cosign-sbom.bundle \
+            sbom-cyclonedx-oci.json
+          if docker push "${{ steps.build_image.outputs.image_uri }}:${GITHUB_SHA}"; then
+            DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' "${{ steps.build_image.outputs.image_uri }}:${GITHUB_SHA}" | cut -d'@' -f2)
+            cosign sign --yes "${{ steps.build_image.outputs.image_uri }}@${DIGEST}"
+            cosign attest --yes --predicate sbom-cyclonedx-oci.json --type cyclonedx "${{ steps.build_image.outputs.image_uri }}@${DIGEST}"
+          fi

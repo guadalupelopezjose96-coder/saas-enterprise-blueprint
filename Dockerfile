@@ -5,13 +5,12 @@
 FROM golang:1.22-alpine AS builder
 
 WORKDIR /src
-COPY go.mod go.sum ./
-COPY vendor/ ./vendor/
+COPY go.mod ./
 COPY cmd/api/main.go ./cmd/api/main.go
 
-# Compilación estática determinista usando los paquetes verificados en vendor/
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
-    -mod=vendor \
+# Resolver sumas criptográficas go.sum y compilar binario estático inmutable
+RUN go mod tidy && \
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
     -ldflags="-w -s -extldflags '-static'" \
     -tags netgo,osusergo \
     -o /out/saas-api-service ./cmd/api/main.go
