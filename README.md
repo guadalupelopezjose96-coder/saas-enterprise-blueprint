@@ -1,7 +1,7 @@
 # Enterprise SaaS B2B Master Blueprint (v4.0.0)
 
 [![Enterprise SaaS DevSecOps Pipeline (SLSA Level 3 + SBOM + Cosign)](https://github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint/actions/workflows/ci-cd-slsa3-pipeline.yml/badge.svg)]([https://github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint/actions/workflows/ci-cd-slsa3-pipeline.yml](https://github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint/actions/workflows/ci-cd-slsa3-pipeline.yml))
-![Compliance Posture](https://img.shields.io/badge/Controles_Verificados-55%2F55_(100%25)-brightgreen)
+![Compliance Posture](https://img.shields.io/badge/Controles_Verificados-60%2F60_(100%25)-brightgreen)
 ![Cryptographic Signature](https://img.shields.io/badge/Firma_Asim%C3%A9trica-Ed25519_%2B_Cosign_OIDC-blue)
 ![Regulatory Scope](https://img.shields.io/badge/Marco_Legal-SOC2_%7C_ISO27001_%7C_GDPR_%7C_EU_AI_Act_%7C_DORA_%7C_ASC606-indigo)
 
@@ -9,7 +9,7 @@ Arquitectura de referencia de grado bancario/empresarial, paquete contractual B2
 
 ---
 
-## Estructura de Modulos y Evidencia de Auditoria (55/55 Controles)
+## Estructura de Modulos y Evidencia de Auditoria (60/60 Controles)
 
 | Dominio | Archivo / Artefacto | Estandar / Regulacion | Control Verificado |
 | :--- | :--- | :--- | :--- |

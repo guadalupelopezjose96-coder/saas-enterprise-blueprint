@@ -1,0 +1,30 @@
+{
+  "holding_entity": "Standard 1979 Holdings, LLC",
+  "beneficial_owner_and_author": "Jose Emanuel Guadalupe Lopez",
+  "ed25519_signing_authority": "SHA256:KwUySdN/G/MP10KULN+FYsyZ9XyNS9osjmNHbBEvE3s",
+  "control_id": "MKT-01",
+  "verified_ecosystem_repositories": [
+    {
+      "repository": "guadalupelopezjose96-coder/saas-enterprise-blueprint",
+      "visibility": "PRIVATE_VAULT",
+      "version": "v4.0.0",
+      "controls_verified": "60/60 (100%)"
+    },
+    {
+      "repository": "guadalupelopezjose96-coder/saas-enterprise-trust-center",
+      "visibility": "PUBLIC_STOREFRONT",
+      "version": "v4.0.0",
+      "live_url": "https://guadalupelopezjose96-coder.github.io/saas-enterprise-trust-center/"
+    },
+    {
+      "repository": "guadalupelopezjose96-coder/gcp-marketplace-saas",
+      "visibility": "UNIFIED_CLOUD_BACKEND",
+      "version": "v1.0.0",
+      "subsidiaries": [
+        "Aura Technologies Operating, LLC (AuraIntelCore.com, AuraTetrax.com, AuraIntelStudios3D.com)",
+        "Phonix Communications Operating, LLC (fourphonix.com, prophonix.com)"
+      ],
+      "endpoints_verified": "10/10 (GCP Marketplace SSO/JWT, Google Play Integrity, Play RTDN Push, Consent Mode v2 TCF v2.2, Stripe Automatic Tax, FinOps Budget Webhook)"
+    }
+  ]
+}

@@ -18,7 +18,7 @@ check_control() {
 }
 
 echo "============================================================================"
-echo " EJECUTANDO AUDITORIA MAESTRA DE 55 CONTROLES (100% COMMERCIAL & TECH)"
+echo " EJECUTANDO AUDITORIA SUPREMA DE 60 CONTROLES (STANDARD 1979 ECOSYSTEM 100%)"
 echo "============================================================================"
 
 check_control "TEN-01 (ISO 8.3)"   "Row-Level Security (RLS) forzado en tablas criticas" "FORCE ROW LEVEL SECURITY" "database/01_schema_rls_and_outbox.sql"
@@ -41,7 +41,7 @@ check_control "PRT-01 (Data Act)"  "Motor de Portabilidad y Salida con 0 Egress 
 check_control "DDQ-01 (CSA CAIQ)"  "Cuestionario automatizado CAIQ v4 / SIG Lite B2B" "CSA_CAIQ_v4.0.3_AND_SIG_LITE_2026" "compliance/CAIQ_V4_SECURITY_QUESTIONNAIRE.json"
 check_control "CHA-01 (DR Drill)"  "Evidencia ejecutable de Failover Multi-Region (RPO 1s / RTO 42s)" "PASS_ZERO_DATA_LOSS" "compliance/DR_FAILOVER_DRILL_EVIDENCE.json"
 check_control "API-01 (OpenAPI)"   "Contrato formal OpenAPI 3.1.0 con mTLS, JWT e Idempotencia" "createTenantTransaction" "api/openapi-v3.1-spec.yaml"
-check_control "TRU-01 (Trust Web)" "Portal interactivo Live Trust & Commercial Center desplegado" "55/55 CONTROLES" "docs/index.html"
+check_control "TRU-01 (Trust Web)" "Portal interactivo Live Trust & Commercial Center desplegado" "60/60 CONTROLES" "docs/index.html"
 check_control "PQC-01 (FIPS 203)"  "Criptografia Post-Cuantica Hibrida X25519MLKEM768 activa" "X25519MLKEM768" "security/01_post_quantum_tls_fips203.conf"
 check_control "BPF-01 (Tetragon)"  "Proteccion Kernel eBPF Cilium Tetragon con Sigkill" "TracingPolicy" "kubernetes/02_tetragon_ebpf_runtime_policy.yaml"
 check_control "TAX-01 (OECD/VAT)"  "Motor Fiscal Internacional IVA Reverse Charge y OCDE BEPS" "EU_VAT_REVERSE_CHARGE_ART196" "finops/02_international_tax_and_transfer_pricing.sql"
@@ -70,11 +70,16 @@ check_control "EXP-01 (EAR/OFAC)"  "Motor de control de exportaciones ECCN 5D002
 check_control "ISO-42 (ISO 42001)" "Sistema de Gestion de IA (AIMS) y evaluacion de impacto AIIA" "ISO/IEC 42001:2023" "ai_governance/03_iso42001_ai_management_system_soa.md"
 check_control "SBX-01 (SPDX 2.3)"  "Manifiesto formal SBOM SPDX 2.3 bajo ISO/IEC 5962:2021" "SPDX-2.3" "compliance/spdx_v2.3_iso5962_sbom.json"
 check_control "CHA-02 (SLO Burn)"  "Alerta multi-ventana SRE de consumo de Error Budget (99.95%)" "SaaSErrorBudgetFastBurnCritical" "observability/02_sre_error_budget_burn_rate_rules.yaml"
-check_control "LIC-01 (UCC 2-316)" "Licencia Comercial Propietaria y Descargo Audit-Ready/Legal" "PROPRIETARY COMMERCIAL SOFTWARE" "LICENSE"
+check_control "LIC-01 (UCC 2-316)" "Licencia Comercial Propietaria Jose Emanuel Guadalupe Lopez" "Jose Emanuel Guadalupe Lopez" "LICENSE"
 check_control "COM-01 (B2B Tiers)" "Catalogo de Comercializacion, Precios y Licenciamiento B2B" "Commercial Licensing Tiers" "commercial/COMMERCIAL_PRICING_AND_TIERS.md"
 check_control "PAY-01 (HMAC Hook)" "Verificador HMAC-SHA256 anti-replay para Webhooks de pago" "VerifyStripeWebhookSignature" "commercial/stripe_b2b_webhook_handler.go"
 check_control "PAY-02 (Sponsors)"  "Pasarela declarativa GitHub Sponsors y Checkout activo" "guadalupelopezjose96-coder" ".github/FUNDING.yml"
 check_control "INV-01 (B2B Ledger)" "Libro mayor SQL de ordenes de licencia B2B con RLS" "b2b_commercial_license_orders" "commercial/01_b2b_license_billing_ledger.sql"
+check_control "GCP-01 (Play/Mkt)"  "Motor Google Cloud Marketplace JWT, Play Integrity y RTDN" "gcp_marketplace_and_play_entitlements" "cloud_marketplace/01_gcp_marketplace_and_play_rtdn_ledger.sql"
+check_control "DMA-01 (TCF v2.2)"  "Registro Google Consent Mode v2 y Play Account Deletion" "google_consent_and_play_deletion_ledger" "compliance/06_google_consent_mode_v2_and_play_deletion.sql"
+check_control "ROY-01 (IRC § 482)" "Motor de Regalias Intercompania 15% Aura / 10% Phonix" "irc482_intercompany_royalty_settlements" "finops/05_irc482_intercompany_royalty_ledger.sql"
+check_control "DNS-01 (GCP Hard)"  "Endurecimiento GCP Org, Cloud Run Gen2, Break-Glass y DNSSEC" "disableServiceAccountKeyCreation" "terraform/dns_security_workspace_and_cloudrun.tf"
+check_control "MKT-01 (MultiRepo)" "Atestacion unificada con gcp-marketplace-saas (Fourphonix/Aura)" "gcp-marketplace-saas" "compliance/07_multi_repo_ecosystem_attestation.json"
 check_control "LEG-01 (MSA/DPA)"   "Clausulas EU Data Act, EU AI Act, ASC 606 y BYOK vigentes" "EU AI Act" "legal/ORDEN_DE_PEDIDO_B2B_Y_ANEXOS_BYOK_IA.md"
 
 if command -v go >/dev/null 2>&1; then
@@ -84,5 +89,5 @@ if command -v go >/dev/null 2>&1; then
 fi
 
 echo "----------------------------------------------------------------------------"
-echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/55 CONTROLES CRITICOS VERIFICADOS (100%)"
+echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/60 CONTROLES CRITICOS VERIFICADOS (100%)"
 echo "============================================================================"

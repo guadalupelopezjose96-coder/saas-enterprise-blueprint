@@ -27,7 +27,7 @@ cat << JSON > "${CERT_PATH}"
   "licensee_legal_name": "${CLIENT_NAME}",
   "licensee_github_user": "${CLIENT_GITHUB_USER:-PENDING_ASSIGNMENT}",
   "commercial_tier": "${LICENSE_TIER}",
-  "authorized_release": "v4.0.0 (55/55 Controls | 36/36 Lifecycle Phases)",
+  "authorized_release": "v4.0.0 (60/60 Controls | 36/36 Lifecycle Phases)",
   "git_commit_sha": "${COMMIT_SHA}",
   "rfc6962_merkle_root_sha256": "${MERKLE_ROOT}",
   "ed25519_authority_fingerprint": "SHA256:KwUySdN/G/MP10KULN+FYsyZ9XyNS9osjmNHbBEvE3s",

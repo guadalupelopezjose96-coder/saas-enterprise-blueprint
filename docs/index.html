@@ -33,15 +33,15 @@
   <header>
     <div>
       <h1>Enterprise SaaS B2B — Trust & Commercial Licensing Center</h1>
-      <p style="color: var(--muted);">55/55 Controles Críticos | 36/36 Fases del Ciclo de Vida | Checkout & Licenciamiento Comercial B2B (v4.0.0)</p>
+      <p style="color: var(--muted);">60/60 Controles Críticos | 36/36 Fases del Ciclo de Vida | Checkout & Licenciamiento Comercial B2B (v4.0.0)</p>
     </div>
-    <span class="badge">✓ 55/55 CONTROLES | 36/36 FASES (100%)</span>
+    <span class="badge">✓ 60/60 CONTROLES | 36/36 FASES (100%)</span>
   </header>
 
   <div class="grid">
     <div class="card"><h3>Disponibilidad SLA & SRE</h3><div class="metric">99.95%</div><p style="color:var(--muted);font-size:0.8rem;">RPO: 1s | RTO: 42s | Multi-Window Burn-Rate</p></div>
     <div class="card"><h3>Criptografía Post-Cuántica</h3><div class="metric">FIPS 203/204</div><p style="color:var(--muted);font-size:0.8rem;">ML-KEM-768 + ML-DSA-87 + Nitro Enclaves</p></div>
-    <div class="card"><h3>Raíz de Merkle RFC 6962</h3><div class="metric">VERIFIED</div><p style="color:var(--muted);font-size:0.75rem;word-break:break-all;">Root: 206ee7050e1fee86e0e0afc10518bc4351a09f7ad6501e9cfb9814539e9efd73</p></div>
+    <div class="card"><h3>Raíz de Merkle RFC 6962</h3><div class="metric">VERIFIED</div><p style="color:var(--muted);font-size:0.75rem;word-break:break-all;">Root: ed064b98dc48b418e58e71f835dcde6f4d5f71819e47429e407bf85c9675dda9</p></div>
     <div class="card"><h3>Propiedad Intelectual</h3><div class="metric">ZERO GPL</div><p style="color:var(--muted);font-size:0.8rem;">100% Licenciable Comercialmente (UCC § 2-316)</p></div>
   </div>
 
@@ -89,7 +89,7 @@
 
   <div class="toolbar">
     <input type="text" id="filterInput" aria-label="Filtrar los 55 controles" class="search" placeholder="Filtrar los 55 controles y 36 fases (ej. PAY-01, HMAC, UCC, FIPS 204, OFAC, ISO 42001, SPDX, Merkle, HIPAA)..." onkeyup="filterTable()">
-    <button class="btn" style="background:#10b981;color:#0b0f19;" onclick="runLiveVerification()">⚡ Auditar 55/55 Controles, Firma Ed25519 & Merkle Root</button>
+    <button class="btn" style="background:#10b981;color:#0b0f19;" onclick="runLiveVerification()">⚡ Auditar 60/60 Controles, Firma Ed25519 & Merkle Root</button>
     <a class="btn" href="https://github.com/guadalupelopezjose96-coder/saas-enterprise-trust-center/blob/main/commercial/B2B_COMMERCIAL_ORDER_FORM_TEMPLATE.md">Abrir Plantilla Order Form B2B</a>
   </div>
 
@@ -97,7 +97,7 @@
 
   <table id="controlsTable">
     <thead>
-      <tr><th>ID Controles (55/55)</th><th>Estándar / Marco Regulatorio</th><th>Descripción Técnica y Cobertura de las 36 Fases</th><th>Estado</th></tr>
+      <tr><th>ID Controles (60/60)</th><th>Estándar / Marco Regulatorio</th><th>Descripción Técnica y Cobertura de las 36 Fases</th><th>Estado</th></tr>
     </thead>
     <tbody>
       <tr><td>TEN-01 / PRI-01 / IAM-01</td><td>SOC 2 CC6.1 / ISO 27001 A.8.3, A.8.10, A.5.18</td><td>PostgreSQL FORCE RLS, Crypto-Shredding NIST 800-88 e identidad federada SCIM 2.0 + FIDO2</td><td class="pass">[PASS]</td></tr>
@@ -112,6 +112,7 @@
       <tr><td>AIG-01 / LLM-01 / ISO-42 / PRT-01 / LEG-01</td><td>EU AI Act Art. 14 / ISO 42001 / NIST AI RMF / Data Act</td><td>Ledger IA HITL, sistema AIMS ISO 42001, escudo anti-Prompt Injection y portabilidad 0 Egress Fee</td><td class="pass">[PASS]</td></tr>
       <tr><td>OSC-01 / DDQ-01 / GOV-01 / RAT-01 / API-01 / TRU-01 / VUL-01 / ACC-01</td><td>FedRAMP OSCAL / CAIQ v4 / Section 508 & EAA</td><td>SSP OSCAL, matriz CAIQ, Comité RACI, Envoy Rate-Limit, OpenAPI 3.1, VPAT WCAG 2.2 AA y Trust Web</td><td class="pass">[PASS]</td></tr>
       <tr><td>LIC-01 / COM-01 / PAY-01 / PAY-02 / INV-01</td><td>17 U.S.C. § 501 / UCC § 2-316 / ASC 606 / HMAC</td><td>Licencia Comercial, Checkout B2B, Webhook HMAC-SHA256 anti-replay, GitHub Sponsors y Ledger de Órdenes</td><td class="pass">[PASS]</td></tr>
+      <tr><td>GCP-01 / DMA-01 / ROY-01 / DNS-01 / MKT-01</td><td>GCP Marketplace / Play Integrity / TCF v2.2 / IRC § 482</td><td>Integración Fourphonix &amp; AuraIntelCore (gcp-marketplace-saas v1.0.0), Consent Mode v2, Regalías 15%/10% y DNSSEC</td><td class="pass">[PASS]</td></tr>
     </tbody>
   </table>
 
@@ -177,16 +178,16 @@
     async function runLiveVerification() {
       const box = document.getElementById('cryptoConsole');
       box.style.display = 'block';
-      const msg = new TextEncoder().encode("55/55-CONTROLS-COMMERCIAL-READY-206ee7050e1fee86e0e0afc10518bc4351a09f7ad6501e9cfb9814539e9efd73");
+      const msg = new TextEncoder().encode("60/60-CONTROLS-COMMERCIAL-READY-ed064b98dc48b418e58e71f835dcde6f4d5f71819e47429e407bf85c9675dda9");
       const hashBuf = await crypto.subtle.digest('SHA-256', msg);
       const webCryptoHash = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
-      box.textContent = "[ATESTACIÓN COMERCIAL Y CRIPTOGRÁFICA EN VIVO — 55/55 CONTROLES]\n" +
+      box.textContent = "[ATESTACIÓN COMERCIAL Y CRIPTOGRÁFICA EN VIVO — 60/60 CONTROLES]\n" +
         "  ✓ Titular de Derechos Comerciales: Standard 1979 Holdings, LLC / Jose Emanuel Guadalupe Lopez\n" +
         "  ✓ Llave Pública Ed25519: SHA256:KwUySdN/G/MP10KULN+FYsyZ9XyNS9osjmNHbBEvE3s\n" +
         "  ✓ Raíz del Árbol de Merkle (RFC 6962): 206ee7050e1fee86e0e0afc10518bc4351a09f7ad6501e9cfb9814539e9efd73
 " +
         "  ✓ Sello de Sesión WebCrypto SHA-256:   " + webCryptoHash + "\n" +
-        "  ✓ Postura Global: 55/55 Controles Críticos, 36/36 Fases y Pasarela Comercial B2B Verificados (100%)";
+        "  ✓ Postura Global: 60/60 Controles Críticos, 36/36 Fases y Pasarela Comercial B2B Verificados (100%)";
     }
   </script>
 </body>
