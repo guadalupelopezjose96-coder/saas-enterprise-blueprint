@@ -41,7 +41,7 @@
   <div class="grid">
     <div class="card"><h3>Disponibilidad SLA & SRE</h3><div class="metric">99.95%</div><p style="color:var(--muted);font-size:0.8rem;">RPO: 1s | RTO: 42s | Multi-Window Burn-Rate</p></div>
     <div class="card"><h3>Criptografía Post-Cuántica</h3><div class="metric">FIPS 203/204</div><p style="color:var(--muted);font-size:0.8rem;">ML-KEM-768 + ML-DSA-87 + Nitro Enclaves</p></div>
-    <div class="card"><h3>Raíz de Merkle RFC 6962</h3><div class="metric">VERIFIED</div><p style="color:var(--muted);font-size:0.75rem;word-break:break-all;">Root: 06d85e0585f6e779cf1ecc15d38139e4739b9a1666c71aa91c88b1d81ff6cadc</p></div>
+    <div class="card"><h3>Raíz de Merkle RFC 6962</h3><div class="metric">VERIFIED</div><p style="color:var(--muted);font-size:0.75rem;word-break:break-all;">Root: 0248b8bcf474e1b48ace7e94e918d78467b18afc72e6a9b3c46f815059bb7ee9</p></div>
     <div class="card"><h3>Propiedad Intelectual</h3><div class="metric">ZERO GPL</div><p style="color:var(--muted);font-size:0.8rem;">100% Licenciable Comercialmente (UCC § 2-316)</p></div>
   </div>
 
@@ -178,7 +178,7 @@
     async function runLiveVerification() {
       const box = document.getElementById('cryptoConsole');
       box.style.display = 'block';
-      const msg = new TextEncoder().encode("60/60-CONTROLS-COMMERCIAL-READY-06d85e0585f6e779cf1ecc15d38139e4739b9a1666c71aa91c88b1d81ff6cadc");
+      const msg = new TextEncoder().encode("60/60-CONTROLS-COMMERCIAL-READY-0248b8bcf474e1b48ace7e94e918d78467b18afc72e6a9b3c46f815059bb7ee9");
       const hashBuf = await crypto.subtle.digest('SHA-256', msg);
       const webCryptoHash = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
       box.textContent = "[ATESTACIÓN COMERCIAL Y CRIPTOGRÁFICA EN VIVO — 60/60 CONTROLES]\n" +
