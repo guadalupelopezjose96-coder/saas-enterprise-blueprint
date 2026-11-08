@@ -18,7 +18,7 @@ check_control() {
 }
 
 echo "============================================================================"
-echo " EJECUTANDO AUDITORIA COMERCIAL Y TECNICA DE 52 CONTROLES (100% POSTURE)"
+echo " EJECUTANDO AUDITORIA MAESTRA DE 55 CONTROLES (100% COMMERCIAL & TECH)"
 echo "============================================================================"
 
 check_control "TEN-01 (ISO 8.3)"   "Row-Level Security (RLS) forzado en tablas criticas" "FORCE ROW LEVEL SECURITY" "database/01_schema_rls_and_outbox.sql"
@@ -41,7 +41,7 @@ check_control "PRT-01 (Data Act)"  "Motor de Portabilidad y Salida con 0 Egress 
 check_control "DDQ-01 (CSA CAIQ)"  "Cuestionario automatizado CAIQ v4 / SIG Lite B2B" "CSA_CAIQ_v4.0.3_AND_SIG_LITE_2026" "compliance/CAIQ_V4_SECURITY_QUESTIONNAIRE.json"
 check_control "CHA-01 (DR Drill)"  "Evidencia ejecutable de Failover Multi-Region (RPO 1s / RTO 42s)" "PASS_ZERO_DATA_LOSS" "compliance/DR_FAILOVER_DRILL_EVIDENCE.json"
 check_control "API-01 (OpenAPI)"   "Contrato formal OpenAPI 3.1.0 con mTLS, JWT e Idempotencia" "createTenantTransaction" "api/openapi-v3.1-spec.yaml"
-check_control "TRU-01 (Trust Web)" "Portal interactivo Live Trust & Compliance Center desplegado" "52/52 CONTROLES" "docs/index.html"
+check_control "TRU-01 (Trust Web)" "Portal interactivo Live Trust & Commercial Center desplegado" "55/55 CONTROLES" "docs/index.html"
 check_control "PQC-01 (FIPS 203)"  "Criptografia Post-Cuantica Hibrida X25519MLKEM768 activa" "X25519MLKEM768" "security/01_post_quantum_tls_fips203.conf"
 check_control "BPF-01 (Tetragon)"  "Proteccion Kernel eBPF Cilium Tetragon con Sigkill" "TracingPolicy" "kubernetes/02_tetragon_ebpf_runtime_policy.yaml"
 check_control "TAX-01 (OECD/VAT)"  "Motor Fiscal Internacional IVA Reverse Charge y OCDE BEPS" "EU_VAT_REVERSE_CHARGE_ART196" "finops/02_international_tax_and_transfer_pricing.sql"
@@ -72,6 +72,9 @@ check_control "SBX-01 (SPDX 2.3)"  "Manifiesto formal SBOM SPDX 2.3 bajo ISO/IEC
 check_control "CHA-02 (SLO Burn)"  "Alerta multi-ventana SRE de consumo de Error Budget (99.95%)" "SaaSErrorBudgetFastBurnCritical" "observability/02_sre_error_budget_burn_rate_rules.yaml"
 check_control "LIC-01 (UCC 2-316)" "Licencia Comercial Propietaria y Descargo Audit-Ready/Legal" "PROPRIETARY COMMERCIAL SOFTWARE" "LICENSE"
 check_control "COM-01 (B2B Tiers)" "Catalogo de Comercializacion, Precios y Licenciamiento B2B" "Commercial Licensing Tiers" "commercial/COMMERCIAL_PRICING_AND_TIERS.md"
+check_control "PAY-01 (HMAC Hook)" "Verificador HMAC-SHA256 anti-replay para Webhooks de pago" "VerifyStripeWebhookSignature" "commercial/stripe_b2b_webhook_handler.go"
+check_control "PAY-02 (Sponsors)"  "Pasarela declarativa GitHub Sponsors y Checkout activo" "guadalupelopezjose96-coder" ".github/FUNDING.yml"
+check_control "INV-01 (B2B Ledger)" "Libro mayor SQL de ordenes de licencia B2B con RLS" "b2b_commercial_license_orders" "commercial/01_b2b_license_billing_ledger.sql"
 check_control "LEG-01 (MSA/DPA)"   "Clausulas EU Data Act, EU AI Act, ASC 606 y BYOK vigentes" "EU AI Act" "legal/ORDEN_DE_PEDIDO_B2B_Y_ANEXOS_BYOK_IA.md"
 
 if command -v go >/dev/null 2>&1; then
@@ -81,5 +84,5 @@ if command -v go >/dev/null 2>&1; then
 fi
 
 echo "----------------------------------------------------------------------------"
-echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/52 CONTROLES CRITICOS VERIFICADOS (100%)"
+echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/55 CONTROLES CRITICOS VERIFICADOS (100%)"
 echo "============================================================================"

@@ -1,4 +1,4 @@
-name: Enterprise SaaS DevSecOps Pipeline (SLSA Level 3 + SBOM + Cosign + 52/52 Controls)
+name: Enterprise SaaS DevSecOps Pipeline (SLSA Level 3 + SBOM + Cosign + 55/55 Controls)
 
 on:
   push:
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   security-compliance-and-license-gate:
-    name: "Gate 1: Auditoria de 52/52 Controles, 36 Fases, Licencia Comercial, Merkle RFC 6962, DLP y Go Fuzz/Tests"
+    name: "Gate 1: Auditoria de 55/55 Controles, 36 Fases, Licencia Comercial, Merkle RFC 6962, DLP y Go Fuzz/Tests"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Inmutable del Codigo Fuente
@@ -36,7 +36,7 @@ jobs:
       - name: Verificar Raiz Criptografica del Arbol de Merkle RFC 6962 (Control MRK-01)
         run: python3 security/05_rfc6962_merkle_tree_transparency_log.py
 
-      - name: Ejecutar Auditoria Maestra de los 52/52 Controles y 36 Fases del Ciclo de Vida
+      - name: Ejecutar Auditoria Maestra de los 55/55 Controles y 36 Fases del Ciclo de Vida
         run: |
           chmod +x verify_compliance_posture.sh
           ./verify_compliance_posture.sh
