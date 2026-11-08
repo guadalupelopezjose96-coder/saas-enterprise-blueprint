@@ -20,7 +20,7 @@ CERT_PATH="${OUT_DIR}/COMMERCIAL_LICENSE_CERTIFICATE.json"
 
 cat << JSON > "${CERT_PATH}"
 {
-  "licensor": "Standard 1979 Holdings, LLC / Guadalupe Lopez Jose",
+  "licensor": "Standard 1979 Holdings, LLC / Jose Emanuel Guadalupe Lopez",
   "license_agreement_standard": "17 U.S.C. 501 & UCC 2-316 Proprietary Commercial License",
   "license_id": "${LICENSE_UUID}",
   "issued_at_utc": "${ISSUE_TS}",

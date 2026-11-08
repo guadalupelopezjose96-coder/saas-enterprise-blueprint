@@ -41,7 +41,7 @@
   <div class="grid">
     <div class="card"><h3>Disponibilidad SLA & SRE</h3><div class="metric">99.95%</div><p style="color:var(--muted);font-size:0.8rem;">RPO: 1s | RTO: 42s | Multi-Window Burn-Rate</p></div>
     <div class="card"><h3>Criptografía Post-Cuántica</h3><div class="metric">FIPS 203/204</div><p style="color:var(--muted);font-size:0.8rem;">ML-KEM-768 + ML-DSA-87 + Nitro Enclaves</p></div>
-    <div class="card"><h3>Raíz de Merkle RFC 6962</h3><div class="metric">VERIFIED</div><p style="color:var(--muted);font-size:0.75rem;word-break:break-all;">Root: afad8a04a7206dcf21f761af28ff458100c3f78e21add0e78a8a3942852bdb81</p></div>
+    <div class="card"><h3>Raíz de Merkle RFC 6962</h3><div class="metric">VERIFIED</div><p style="color:var(--muted);font-size:0.75rem;word-break:break-all;">Root: 206ee7050e1fee86e0e0afc10518bc4351a09f7ad6501e9cfb9814539e9efd73</p></div>
     <div class="card"><h3>Propiedad Intelectual</h3><div class="metric">ZERO GPL</div><p style="color:var(--muted);font-size:0.8rem;">100% Licenciable Comercialmente (UCC § 2-316)</p></div>
   </div>
 
@@ -151,7 +151,7 @@
         "============================================================================\n" +
         "ID Criptográfico de Orden (SHA-256): " + orderHash + "\n" +
         "Fecha de Emisión UTC:                " + ts + "\n" +
-        "Licenciante:                         Standard 1979 Holdings, LLC / Guadalupe Lopez Jose\n" +
+        "Licenciante:                         Standard 1979 Holdings, LLC / Jose Emanuel Guadalupe Lopez\n" +
         "Nivel Comercial Seleccionado:        " + currentTierCode + " (" + currentTierPrice + ")\n" +
         "----------------------------------------------------------------------------\n" +
         "Razón Social del Licenciatario:      " + legalName + "\n" +
@@ -177,13 +177,14 @@
     async function runLiveVerification() {
       const box = document.getElementById('cryptoConsole');
       box.style.display = 'block';
-      const msg = new TextEncoder().encode("55/55-CONTROLS-COMMERCIAL-READY-afad8a04a7206dcf21f761af28ff458100c3f78e21add0e78a8a3942852bdb81");
+      const msg = new TextEncoder().encode("55/55-CONTROLS-COMMERCIAL-READY-206ee7050e1fee86e0e0afc10518bc4351a09f7ad6501e9cfb9814539e9efd73");
       const hashBuf = await crypto.subtle.digest('SHA-256', msg);
       const webCryptoHash = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
       box.textContent = "[ATESTACIÓN COMERCIAL Y CRIPTOGRÁFICA EN VIVO — 55/55 CONTROLES]\n" +
-        "  ✓ Titular de Derechos Comerciales: Standard 1979 Holdings, LLC / Guadalupe Lopez Jose\n" +
+        "  ✓ Titular de Derechos Comerciales: Standard 1979 Holdings, LLC / Jose Emanuel Guadalupe Lopez\n" +
         "  ✓ Llave Pública Ed25519: SHA256:KwUySdN/G/MP10KULN+FYsyZ9XyNS9osjmNHbBEvE3s\n" +
-        "  ✓ Raíz del Árbol de Merkle (RFC 6962): afad8a04a7206dcf21f761af28ff458100c3f78e21add0e78a8a3942852bdb81\n" +
+        "  ✓ Raíz del Árbol de Merkle (RFC 6962): 206ee7050e1fee86e0e0afc10518bc4351a09f7ad6501e9cfb9814539e9efd73
+" +
         "  ✓ Sello de Sesión WebCrypto SHA-256:   " + webCryptoHash + "\n" +
         "  ✓ Postura Global: 55/55 Controles Críticos, 36/36 Fases y Pasarela Comercial B2B Verificados (100%)";
     }

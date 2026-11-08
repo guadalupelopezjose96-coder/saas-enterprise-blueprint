@@ -1,6 +1,6 @@
 # ORDEN DE COMPRA Y LICENCIAMIENTO COMERCIAL B2B (*COMMERCIAL ORDER FORM*)
 
-- **Licenciante (Titular de Propiedad Intelectual):** Standard 1979 Holdings, LLC / Guadalupe Lopez Jose
+- **Licenciante (Titular de Propiedad Intelectual):** Standard 1979 Holdings, LLC / Jose Emanuel Guadalupe Lopez
 - **Producto:** Enterprise SaaS B2B Master Blueprint (`v4.0.0` — 52/52 Controles Verificados | 36/36 Fases)
 - **Régimen Legal Aplicable:** Licencia Comercial Propietaria (`LICENSE` bajo 17 U.S.C. § 501 y UCC § 2-316)
 

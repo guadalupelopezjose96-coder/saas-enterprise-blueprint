@@ -1,7 +1,7 @@
 # Estructura Oficial de Comercialización y Licenciamiento B2B (`v4.0.0`)
 
 - **Producto:** Enterprise SaaS B2B Master Blueprint & Automated GRC/DevSecOps Suite (`52/52 Controles Verificados — 36/36 Fases`)
-- **Titular de Derechos Comerciales:** Standard 1979 Holdings, LLC / Guadalupe Lopez Jose
+- **Titular de Derechos Comerciales:** Standard 1979 Holdings, LLC / Jose Emanuel Guadalupe Lopez
 - **Modelo de Negocio:** Licenciamiento Comercial Propietario de Arquitectura de Referencia (*Audit-Ready Accelerator*) con Cero Contaminación *Copyleft* (`MIT-only dependencies`).
 
 ---
