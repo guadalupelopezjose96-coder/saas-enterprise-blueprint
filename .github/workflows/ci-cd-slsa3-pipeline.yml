@@ -24,7 +24,7 @@ jobs:
       - name: Checkout Inmutable del Codigo Fuente
         run: |
           git init .
-          git remote add origin https://github.com/${{ github.repository }}.git || git remote set-url origin https://github.com/${{ github.repository }}.git
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git || git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git fetch --no-tags --prune --depth=1 origin ${{ github.sha }}
           git checkout --force ${{ github.sha }}
 
@@ -63,7 +63,7 @@ jobs:
       - name: Checkout del Codigo
         run: |
           git init .
-          git remote add origin https://github.com/${{ github.repository }}.git || git remote set-url origin https://github.com/${{ github.repository }}.git
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git || git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git fetch --no-tags --prune --depth=1 origin ${{ github.sha }}
           git checkout --force ${{ github.sha }}
 
