@@ -20,13 +20,14 @@ jobs:
   security-compliance-and-license-gate:
     name: "Gate 1: Auditoria de 60/60 Controles, 36 Fases, Licencia Comercial, Merkle RFC 6962, DLP y Go Fuzz/Tests"
     runs-on: ubuntu-24.04
-    steps:
+        steps:
       - name: Checkout Inmutable del Codigo Fuente
-        run: |
-          git init .
-          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git || git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git fetch --no-tags --prune --depth=1 origin ${{ github.sha }}
-          git checkout --force ${{ github.sha }}
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          persist-credentials: true
+
 
       - name: Configurar Entorno Go (ISO 8.29)
         run: go version
