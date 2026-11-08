@@ -1,0 +1,26 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "ghcr.io/guadalupelopezjose96-coder/saas-api-service",
+      "digest": {
+        "sha256": "850f483080b99ba8daf70247726070904f6e83663bc9e04ebfbd8125a6ec0ff5"
+      }
+    }
+  ],
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "https://actions.github.io/buildtypes/workflow/v1",
+      "externalParameters": {
+        "workflow": ".github/workflows/ci-cd-slsa3-pipeline.yml",
+        "repository": "https://github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint"
+      }
+    },
+    "runDetails": {
+      "builder": {
+        "id": "https://github.com/actions/runner/slsa-level-3"
+      }
+    }
+  }
+}

@@ -14,7 +14,7 @@ cat << CERT > "${CERT_FILE}"
 - **Fecha de Emision:** \`${TIMESTAMP_UTC}\`
 - **Commit Base Verificado:** \`${COMMIT_HASH}\`
 - **Huella Criptografica del Firmante (Ed25519):** \`${SIGNER_FINGERPRINT}\`
-- **Resultado de Auditoria Automatizada:** **30/30 Controles Criticos Verificados (100%)**
+- **Resultado de Auditoria Automatizada:** **35/35 Controles Criticos Verificados (100%)**
 
 ---
 

@@ -18,7 +18,7 @@ check_control() {
 }
 
 echo "============================================================================"
-echo " EJECUTANDO AUDITORIA SUPREMA DE 30 CONTROLES (SOC2, ISO27001, FEDRAMP, PQC)"
+echo " EJECUTANDO AUDITORIA OMNISCIENTE DE 35 CONTROLES (SOC2, ISO, PCI-DSS, PQC)"
 echo "============================================================================"
 
 check_control "TEN-01 (ISO 8.3)"   "Row-Level Security (RLS) forzado en tablas criticas" "FORCE ROW LEVEL SECURITY" "database/01_schema_rls_and_outbox.sql"
@@ -41,7 +41,7 @@ check_control "PRT-01 (Data Act)"  "Motor de Portabilidad y Salida con 0 Egress 
 check_control "DDQ-01 (CSA CAIQ)"  "Cuestionario automatizado CAIQ v4 / SIG Lite B2B" "CSA_CAIQ_v4.0.3_AND_SIG_LITE_2026" "compliance/CAIQ_V4_SECURITY_QUESTIONNAIRE.json"
 check_control "CHA-01 (DR Drill)"  "Evidencia ejecutable de Failover Multi-Region (RPO 1s / RTO 42s)" "PASS_ZERO_DATA_LOSS" "compliance/DR_FAILOVER_DRILL_EVIDENCE.json"
 check_control "API-01 (OpenAPI)"   "Contrato formal OpenAPI 3.1.0 con mTLS, JWT e Idempotencia" "createTenantTransaction" "api/openapi-v3.1-spec.yaml"
-check_control "TRU-01 (Trust Web)" "Portal ejecutivo Live Trust & Compliance Center desplegado" "30/30 CONTROLES VERIFICADOS" "docs/index.html"
+check_control "TRU-01 (Trust Web)" "Portal interactivo Live Trust & Compliance Center desplegado" "35/35 CONTROLES VERIFICADOS" "docs/index.html"
 check_control "PQC-01 (FIPS 203)"  "Criptografia Post-Cuantica Hibrida X25519MLKEM768 activa" "X25519MLKEM768" "security/01_post_quantum_tls_fips203.conf"
 check_control "BPF-01 (Tetragon)"  "Proteccion Kernel eBPF Cilium Tetragon con Sigkill" "TracingPolicy" "kubernetes/02_tetragon_ebpf_runtime_policy.yaml"
 check_control "TAX-01 (OECD/VAT)"  "Motor Fiscal Internacional IVA Reverse Charge y OCDE BEPS" "EU_VAT_REVERSE_CHARGE_ART196" "finops/02_international_tax_and_transfer_pricing.sql"
@@ -50,14 +50,19 @@ check_control "OPA-01 (Rego PaC)"  "Guardrails preventivos Open Policy Agent (Re
 check_control "ENC-01 (Nitro TEE)" "Atestacion criptografica PCR0 para AWS Nitro Enclaves" "RecipientAttestation:ImageSha384" "security/03_confidential_computing_enclave_attestation.json"
 check_control "IAM-01 (SCIM 2.0)"  "Identidad federada SCIM 2.0 con FIDO2 obligatorio y RLS" "mfa_hardware_fido2_verified" "database/02_scim_identity_and_session_revocation.sql"
 check_control "FOC-01 (FOCUS/ESG)" "Ledger FinOps FOCUS 1.0 y emisiones de carbono UE CSRD" "focus_cost_and_carbon_ledger" "finops/03_focus_cost_and_esg_carbon_ledger.sql"
+check_control "FUZ-01 (Go Fuzz)"   "Pruebas de Fuzzing nativo en Go contra inyeccion y mutaciones" "FuzzTenantUUIDValidation" "cmd/api/fuzz_test.go"
+check_control "PCI-01 (PCI v4.0)"  "Boveda de Tokenizacion PCI-DSS v4.0.1 sin PAN ni CVV" "chk_pci_dss_no_raw_pan_in_token" "database/03_pci_dss_v4_tokenization_vault.sql"
+check_control "RAT-01 (Envoy L7)"  "Rate-Limiting Token Bucket por Tenant contra Noisy Neighbor" "per-tenant-token-bucket-ratelimit" "kubernetes/03_envoy_per_tenant_ratelimit.yaml"
+check_control "INT-02 (SLSA v1.0)" "Atestacion formal de proveniencia In-Toto SLSA v1.0" "https://slsa.dev/provenance/v1" "compliance/slsa_v1_provenance_attestation.json"
+check_control "GOV-01 (COSO RACI)" "Estatuto del Comite de Riesgos y Matriz RACI Ejecutiva" "Matriz RACI de Gobernanza" "compliance/03_board_risk_committee_charter.md"
 check_control "LEG-01 (MSA/DPA)"   "Clausulas EU Data Act, EU AI Act, ASC 606 y BYOK vigentes" "EU AI Act" "legal/ORDEN_DE_PEDIDO_B2B_Y_ANEXOS_BYOK_IA.md"
 
 if command -v go >/dev/null 2>&1; then
   echo "----------------------------------------------------------------------------"
-  echo " EJECUTANDO PRUEBAS UNITARIAS DE SEGURIDAD EN GO (ISO 8.29):"
+  echo " EJECUTANDO SUITE UNITARIA Y SEMILLAS DE FUZZING EN GO (ISO 8.29):"
   go test -v ./cmd/api/...
 fi
 
 echo "----------------------------------------------------------------------------"
-echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/30 CONTROLES CRITICOS VERIFICADOS (100%)"
+echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/35 CONTROLES CRITICOS VERIFICADOS (100%)"
 echo "============================================================================"

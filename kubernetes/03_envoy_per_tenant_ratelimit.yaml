@@ -1,0 +1,28 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: per-tenant-token-bucket-ratelimit
+  namespace: saas-production
+  annotations:
+    compliance.saas.io/standard: "SOC 2 A1.1 | ISO/IEC 27001:2022 A.8.6 | Control RAT-01"
+spec:
+  workloadSelector:
+    labels:
+      app: saas-api-service
+  configPatches:
+    - applyTo: HTTP_FILTER
+      match:
+        context: SIDECAR_INBOUND
+      patch:
+        operation: INSERT_BEFORE
+        value:
+          name: envoy.filters.http.local_ratelimit
+          typed_config:
+            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
+            type_url: type.googleapis.com/envoy.extensions.filters.http.local_ratelimit.v3.LocalRateLimit
+            value:
+              stat_prefix: http_local_rate_limiter
+              token_bucket:
+                max_tokens: 500
+                tokens_per_fill: 500
+                fill_interval: 1s
