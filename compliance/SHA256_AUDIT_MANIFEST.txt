@@ -1,6 +1,6 @@
 ==================================================================
  MANIFIESTO DE INTEGRIDAD CRIPTOGRÁFICA (SHA-256) - SAAS BLUEPRINT
- Generado en UTC: 2026-11-08T01:52:08Z
+ Generado en UTC: 2026-11-08T01:53:57Z
  Nodo de Auditoría: u0_a315@localhost
 ==================================================================
 
@@ -11,7 +11,7 @@
 cc72afefe3aecca5f0e50e2aab187ced4a3d7b2fc54399034b8d0f31ee1a27d6  /data/data/com.termux/files/home/saas-enterprise-blueprint/LICENSE
 39ec97cbdc0d3e7340da71442f59d436b7f052bd2a67b7f687d91ed77efbec77  /data/data/com.termux/files/home/saas-enterprise-blueprint/README.md
 6eef7c28c522a09faccb0a08aa154e1b5581bc0b2c1824c98d39955357e3a0e3  /data/data/com.termux/files/home/saas-enterprise-blueprint/SECURITY.md
-264e9e870fcffdc5f9207bea63747c04cfa849a094410e5037e4056e90fb9b9e  /data/data/com.termux/files/home/saas-enterprise-blueprint/THIRD-PARTY-NOTICES.txt
+07860ee668ae8af28127a5e06850adb3cae4dbf61dc8469f0e28f2775a11270b  /data/data/com.termux/files/home/saas-enterprise-blueprint/THIRD-PARTY-NOTICES.txt
 11940733a6edb006736b375f43d1b3fd7986bbe2df4e12d2b1474d770bcca7ed  /data/data/com.termux/files/home/saas-enterprise-blueprint/ai_governance/01_eu_ai_act_audit_ledger.sql
 1491c8bf4d90c5e444e730abebaecbfdc3c3157bdce69690f3a3bd7289348eb4  /data/data/com.termux/files/home/saas-enterprise-blueprint/ai_governance/02_nist_ai_rmf_prompt_injection_guard.rego
 d16e3ea88614ec3f2a36873ff90c07df2da0805747757a18a0be40866b035d26  /data/data/com.termux/files/home/saas-enterprise-blueprint/ai_governance/03_iso42001_ai_management_system_soa.md
@@ -20,14 +20,17 @@ e33758c56b83d29af409dd0b2a8e8238bc0edfcc3a8100cfc894329c51c4667b  /data/data/com
 894c0844b629821413fa08994578dafc07ee34ac0dfbcfc6ee305d6b8e46fb85  /data/data/com.termux/files/home/saas-enterprise-blueprint/cmd/api/fuzz_test.go
 2918decbf4fd41f6ce2a5bdf8a747cf8a96cd7e3abae0f3ee4424597eb8e2ba3  /data/data/com.termux/files/home/saas-enterprise-blueprint/cmd/api/main.go
 3e76a2034c27bf586db498d751abec831f29a9d26d2552dffb4773f60e252c91  /data/data/com.termux/files/home/saas-enterprise-blueprint/cmd/api/main_test.go
+ad16a70e215c0db3c225563880d5afd18f039e0733d0f34adffdd1e5741d46c5  /data/data/com.termux/files/home/saas-enterprise-blueprint/commercial/B2B_COMMERCIAL_ORDER_FORM_TEMPLATE.md
 4d0d7265e5559c66e2778b809b5951fc99f8fd1eb61fd61e0178905bfdd8e75e  /data/data/com.termux/files/home/saas-enterprise-blueprint/commercial/COMMERCIAL_PRICING_AND_TIERS.md
 a2eed47b7226180a78ac33ecfd66852960a01bf349ea56e34bfc0e5f0d1f90f7  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/02_dora_nis2_ict_register.sql
 0054aedbc4b25c46fc78577d16ba0dbff4719a2ae18ee955f95b177bae6c51cf  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/03_board_risk_committee_charter.md
+d589cfbaf7499d793fbdd4fafe0e480bd0a878597e6d9124cd93e498f0054fe9  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/04_wcag22_section508_vpat_report.md
 4eef1e3810012532670fe14d7e42ca3c1a359f080844c30a44ad45d792dda30b  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/05_36_PHASE_MASTER_LIFECYCLE_MATRIX.md
 3542497cb5fdd8fa4400470453c41f7de5d774c7a6cfab4aeb9b5e9c8f0bb0d2  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/CAIQ_V4_SECURITY_QUESTIONNAIRE.json
 90cac43e43d68906cead81e7fc0f06c93b36a9fad1335603514694979ccdc50d  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/DR_FAILOVER_DRILL_EVIDENCE.json
-8c8c0665de228df264f0af9647afbc6a75abbce4ac30e6fa2cf928971c647417  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/EXECUTIVE_COMPLIANCE_CERTIFICATE.md
+0b5acea7f45c1c84d36f6b573ade2b2da59746fab20537171554c3d4bad6feff  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/EXECUTIVE_COMPLIANCE_CERTIFICATE.md
 7181ac6dfae3b5a3b66858c2b3ec5207699faa23de30e6f8f6a6f13e7918ac04  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/ISO27001_SOA_AND_IRP_BCDR_MASTER.md
+94fc1d5a6685a8a1591540e8020e3016636a4e6b6737d7273a126e88581ac6f5  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/MERKLE_ROOT_ATTESTATION.json
 95c34778fd5e64f14984c8d4953de080279bd8c6fad4c83929fd0996bf68c51e  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/allowed_signers
 19d269da272ae78d7b453f49e551fdcd4a067b560b0ab9853300c7e9e8623664  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/oscal_system_security_plan.json
 1e49d7340ca75c64857a10affc933ef895a6ebcfef0c55c5511ea41a2d1d3fe1  /data/data/com.termux/files/home/saas-enterprise-blueprint/compliance/slsa_v1_provenance_attestation.json
@@ -39,9 +42,10 @@ fa9c50ce0d094afbefada100478a64b93e6d01f329ae2b1bda77ffa8b5604cf1  /data/data/com
 33f9b86be74570f3be30a85fd600a78cef616b2c9dbe5f1966eb699706a7460a  /data/data/com.termux/files/home/saas-enterprise-blueprint/database/04_hipaa_hitech_ephi_safe_harbor.sql
 a4dc677c478b82a6370fa472407be4fa99a68246d4dc3ac27562f29be896c90b  /data/data/com.termux/files/home/saas-enterprise-blueprint/database/05_data_residency_and_sovereignty_router.sql
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  /data/data/com.termux/files/home/saas-enterprise-blueprint/docs/.nojekyll
-ed851a898048538823d90dd1f6f3972f5eb8a2915d88da9bbf7275761f77823c  /data/data/com.termux/files/home/saas-enterprise-blueprint/docs/index.html
+91a240b2b540f628b384891c69e79670cd0d80c7e6a4949935fd4411fa1d05a5  /data/data/com.termux/files/home/saas-enterprise-blueprint/docs/index.html
 f5df38142dac271f25ba22b7d9382d290d2e458ef97b683e5b05fc5ced0d3ab3  /data/data/com.termux/files/home/saas-enterprise-blueprint/finops/02_international_tax_and_transfer_pricing.sql
 a3f98d66a4dd2fb76bcba56e34d76eefb46ac39884e2819f39907b78ca38b9b0  /data/data/com.termux/files/home/saas-enterprise-blueprint/finops/03_focus_cost_and_esg_carbon_ledger.sql
+2dd9ae43ae5b32c2a728783c2a7fa657a198269cabfe0e376f5776cdddbe6446  /data/data/com.termux/files/home/saas-enterprise-blueprint/finops/04_autonomous_budget_killswitch_and_quotas.sql
 84ba49444649a5b26e0810fef4f543ed875cf0c7d2e0088b745704fb988d85cf  /data/data/com.termux/files/home/saas-enterprise-blueprint/finops/asc606_revenue_engine.sql
 0a3413a4e134b830f76ea7e431aea3b7fe727835ab3890fc5596cf9d9d94c7a7  /data/data/com.termux/files/home/saas-enterprise-blueprint/generate_audit_manifest.sh
 708fe780b8aa8bd155d243c03d8ddfc5dcb7c4110cd41f94e50f5403bff8ebb7  /data/data/com.termux/files/home/saas-enterprise-blueprint/generate_executive_certificate.sh
@@ -51,17 +55,20 @@ a4dfea18b5d699cfcdd1b538b4315ebe9493bb08972092dda87c066f2d0b5da8  /data/data/com
 12de5d7fee2bc5853f1bcc06337b1ff3bc84b80c2df50d1632aeac513b263175  /data/data/com.termux/files/home/saas-enterprise-blueprint/kubernetes/02_tetragon_ebpf_runtime_policy.yaml
 d120718a5a2f8b834529c5c19ae347136561ce9a83ea2853d68b06251c0a0ab7  /data/data/com.termux/files/home/saas-enterprise-blueprint/kubernetes/03_envoy_per_tenant_ratelimit.yaml
 d3ec5b1e547da56622f50f4847ae6889069030f697a130ef95eed12271081f48  /data/data/com.termux/files/home/saas-enterprise-blueprint/kubernetes/04_spiffe_spire_svid_federation.yaml
+c11d9f21e52df04cdd8d6a67a2c2f87c91de2d95fae7c36d3256ed2dffe9aadc  /data/data/com.termux/files/home/saas-enterprise-blueprint/legal/01_ediscovery_legal_hold_immutable_vault.sql
 d1d9f461a1066f42670ffcce4955a62198c7c0f1c624484dd2ba741088d0f47b  /data/data/com.termux/files/home/saas-enterprise-blueprint/legal/02_export_control_ear_ofac_screening.sql
 500f6bf97805a2d86f4b6a335758abbc35065a5727245e405fb6a9128b63f514  /data/data/com.termux/files/home/saas-enterprise-blueprint/legal/ORDEN_DE_PEDIDO_B2B_Y_ANEXOS_BYOK_IA.md
 ad24e71be55da458b346d48b6ec9613c3d3982e9c1628d90e3451daa53ddc555  /data/data/com.termux/files/home/saas-enterprise-blueprint/legal/PAQUETE_CONTRACTUAL_MAESTRO_MSA_DPA_SLA.md
 0dc489b3a5587ebc56985be1de244310a0e4186ae64de54a27c74883c2475ee9  /data/data/com.termux/files/home/saas-enterprise-blueprint/observability/02_sre_error_budget_burn_rate_rules.yaml
 73981b3d0d5e3decbe6e3a4b501010180189c92d89aa12756de0a3b89d6627e8  /data/data/com.termux/files/home/saas-enterprise-blueprint/observability/otel-collector-pii-redaction.yaml
 1367e7ab68dc4a9044f72a6a4dc640a09d7acc5a3e28fad8761da4c2032dcc0a  /data/data/com.termux/files/home/saas-enterprise-blueprint/portability/export_tenant_portable_bundle.sh
-a99809b120b5b9ece64a0c2479e75eeaae746550be18d1799fa959fb844d55e4  /data/data/com.termux/files/home/saas-enterprise-blueprint/sbom-cyclonedx.json
+83dabc12da30c3bb431a968a63965d1e05bf23428fd6d00060de0f211f6ed650  /data/data/com.termux/files/home/saas-enterprise-blueprint/sbom-cyclonedx.json
 fd42ecc2ed66a3ae60525c28f666982c499c144413148136351f9a86428a1773  /data/data/com.termux/files/home/saas-enterprise-blueprint/security/01_post_quantum_tls_fips203.conf
 8d1a1be312dd90f12f7d42744b11db2830742dfff2c65de6586fadce3d989953  /data/data/com.termux/files/home/saas-enterprise-blueprint/security/02_opa_terraform_guardrails.rego
 0b2c30802805b1291e10d85379eae3515c32cab3f205d34d59fbe8bc47bcc104  /data/data/com.termux/files/home/saas-enterprise-blueprint/security/03_confidential_computing_enclave_attestation.json
 c11d3c1baa217c59a77635eddaece57c9ab2921ef1932f20684fc3c59ac330d9  /data/data/com.termux/files/home/saas-enterprise-blueprint/security/04_owasp_crs_waf_and_ssrf_shield.conf
+a70dcb0befa30f9c6dcd30ef41d2f0f0cd91f67e86edbdc07a8148544cccfa19  /data/data/com.termux/files/home/saas-enterprise-blueprint/security/05_rfc6962_merkle_tree_transparency_log.py
+db1689f2245494faa2f17a02737ee29dc8baf5be532500ac5412d2fb3f18d1c5  /data/data/com.termux/files/home/saas-enterprise-blueprint/security/06_zero_secret_leakage_scanner.sh
 7ba8b55d6e9546e800964cb0ec787180ba82c599fe6b38e62692ccc357fe23cd  /data/data/com.termux/files/home/saas-enterprise-blueprint/security/07_nist_fips204_mldsa_signature_policy.json
 31153cec16043cd79c00c4d9b437dbddd3c6cad3b484035dfc9acbbf806df454  /data/data/com.termux/files/home/saas-enterprise-blueprint/terraform/main.tf
 0a946eefbff4c4fd0ade42dfcdc7ad20b70cfd8b502d725fd4d0d7dfecafa839  /data/data/com.termux/files/home/saas-enterprise-blueprint/vendor/github.com/lib/pq/.gitignore
