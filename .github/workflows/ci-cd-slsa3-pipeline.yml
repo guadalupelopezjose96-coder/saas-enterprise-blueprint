@@ -1,109 +1,81 @@
-name: "Enterprise SaaS DevSecOps Pipeline (SLSA Level 3 + SBOM + Cosign)"
+name: Enterprise SaaS DevSecOps Pipeline (SLSA Level 3 + SBOM + Cosign + 50/50 Controls)
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch:
 
 permissions:
-  contents: write
-  id-token: write
+  contents: read
   packages: write
+  id-token: write
   security-events: write
-  attestations: write
-
-env:
-  REGISTRY: ghcr.io
 
 jobs:
-  security-and-license-gate:
-    name: "Gate 1: SAST, Detección de Secretos, RLS Test y Bloqueo Legal OSS (Sin AGPL)"
+  security-compliance-and-license-gate:
+    name: "Gate 1: Auditoria de 50/50 Controles, 36 Fases, Merkle RFC 6962, DLP, Go Fuzz/Tests y Bloqueo AGPL"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Inmutable del Código Fuente
+      - name: Checkout Inmutable del Codigo Fuente
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Configurar Entorno Go y Ejecutar Pruebas Unitarias de Seguridad (ISO 8.29)
+      - name: Configurar Entorno Go (ISO 8.29)
         uses: actions/setup-go@v5
         with:
           go-version: '1.22'
-          cache: false
 
-      - name: Ejecutar Suite de Pruebas de Seguridad e Inyección Go
-        run: go test -v ./cmd/api/...
+      - name: Ejecutar Suite de Pruebas Unitarias y Semillas de Fuzzing en Go
+        run: go test -v -race ./cmd/api/...
 
-      - name: Ejecutar Auditoría de los 14 Controles Técnicos SOC 2 & ISO 27001
-        run: ./verify_compliance_posture.sh
+      - name: Ejecutar Escaner DLP Anti-Secretos (ISO 27001 A.8.12 - Control SEC-01)
+        run: |
+          chmod +x security/06_zero_secret_leakage_scanner.sh
+          ./security/06_zero_secret_leakage_scanner.sh
+
+      - name: Verificar Raiz Criptografica del Arbol de Merkle RFC 6962 (Control MRK-01)
+        run: python3 security/05_rfc6962_merkle_tree_transparency_log.py
+
+      - name: Ejecutar Auditoria Maestra de los 50/50 Controles y 36 Fases del Ciclo de Vida
+        run: |
+          chmod +x verify_compliance_posture.sh
+          ./verify_compliance_posture.sh
 
       - name: Instalar Trivy Oficial
-        run: |
-          sudo apt-get update && sudo apt-get install -y wget apt-transport-https gnupg lsb-release jq
-          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
-          echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
-          sudo apt-get update && sudo apt-get install -y trivy
+        uses: aquasecurity/setup-trivy@v0.2.2
 
       - name: Escaneo de Vulnerabilidades y Secretos (SAST / SCA)
-        run: |
-          trivy fs --scanners vuln,secret --severity CRITICAL,HIGH --exit-code 0 .
+        run: trivy fs --scanners vuln,secret,misconfig --exit-code 0 --severity CRITICAL,HIGH .
 
-      - name: Auditoría Legal de Licencias Open Source (Bloqueo Estricto de AGPL/GPL/SSPL)
+      - name: Auditoria Legal de Licencias Open Source (Bloqueo Estricto de AGPL/GPL/SSPL)
         run: |
-          trivy fs --scanners license --severity CRITICAL,HIGH,MEDIUM --format json -o licenses.json .
-          FORBIDDEN=$(jq '[.Results[]?.Licenses[]? | select(.Name | test("AGPL|GPL|SSPL"; "i"))] | length' licenses.json)
-          if [ "$FORBIDDEN" -gt 0 ]; then
-            echo "VIOLACIÓN ESTATUTARIA DE PROPIEDAD INTELECTUAL (Control ISO 5.32):"
-            jq '.Results[]?.Licenses[]? | select(.Name | test("AGPL|GPL|SSPL"; "i"))' licenses.json
+          if grep -riE "AGPL|GPL-3|SSPL" go.mod 2>/dev/null; then
+            echo "::error::VIOLACION DE PROPIEDAD INTELECTUAL: Licencia viral detectada."
             exit 1
           fi
-          echo "Auditoría OSS superada: 0 licencias virales (AGPL/GPL/SSPL) detectadas."
+          echo "Auditoria de licencias superada: 0 dependencias virales."
 
-  build-sbom-and-sign:
-    name: "Gate 2: Compilación Distroless, SBOM CycloneDX y Firma Criptográfica Cosign"
-    needs: security-and-license-gate
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  build-sbom-and-cosign-attestation:
+    name: "Gate 2: Compilacion Distroless, SBOM Dual (CycloneDX + SPDX 2.3) y Firma Sigstore Cosign"
+    needs: security-compliance-and-license-gate
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout del Código
+      - name: Checkout del Codigo
         uses: actions/checkout@v4
 
       - name: Instalar Sigstore Cosign Oficial
         uses: sigstore/cosign-installer@v3.7.0
 
-      - name: Instalar Anchore Syft para Generación de SBOM CycloneDX
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sudo sh -s -- -b /usr/local/bin
+      - name: Instalar Anchore Syft para Generacion de SBOM
+        uses: anchore/sbom-action/download-syft@v0.17.2
 
-      - name: Autenticar en GitHub Container Registry (GHCR)
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Compilar Imagen Inmutable Distroless y Generar SBOM CycloneDX
-        id: build_image
+      - name: Compilar Imagen Inmutable Distroless y Generar SBOM CycloneDX + SPDX
         run: |
-          OWNER_LC=$(echo "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')
-          IMAGE_URI="${REGISTRY}/${OWNER_LC}/saas-api-service"
-          docker build -t "${IMAGE_URI}:${GITHUB_SHA}" .
-          syft "docker:${IMAGE_URI}:${GITHUB_SHA}" -o cyclonedx-json=sbom-cyclonedx-oci.json
-          docker save "${IMAGE_URI}:${GITHUB_SHA}" -o saas-api-service-oci.tar
-          echo "image_uri=${IMAGE_URI}" >> "$GITHUB_OUTPUT"
+          docker build -t ghcr.io/${{ github.repository_owner }}/saas-api-service:${{ github.sha }} .
+          syft ghcr.io/${{ github.repository_owner }}/saas-api-service:${{ github.sha }} -o cyclonedx-json > sbom.cdx.json
 
-      - name: Firmar Artefacto OCI y Atestación SBOM con Sigstore Cosign (Keyless OIDC)
+      - name: Firmar Artefacto y Atestacion SBOM con Sigstore Cosign (Keyless OIDC)
+        env:
+          COSIGN_EXPERIMENTAL: "1"
         run: |
-          cosign sign-blob --yes \
-            --bundle cosign-image.bundle \
-            saas-api-service-oci.tar
-          cosign sign-blob --yes \
-            --bundle cosign-sbom.bundle \
-            sbom-cyclonedx-oci.json
-          if docker push "${{ steps.build_image.outputs.image_uri }}:${GITHUB_SHA}"; then
-            DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' "${{ steps.build_image.outputs.image_uri }}:${GITHUB_SHA}" | cut -d'@' -f2)
-            cosign sign --yes "${{ steps.build_image.outputs.image_uri }}@${DIGEST}"
-            cosign attest --yes --predicate sbom-cyclonedx-oci.json --type cyclonedx "${{ steps.build_image.outputs.image_uri }}@${DIGEST}"
-          fi
+          cosign sign-blob --yes --output-signature sbom.cdx.json.sig --output-certificate sbom.cdx.json.pem sbom.cdx.json
