@@ -5,12 +5,13 @@
 FROM golang:1.22-alpine AS builder
 
 WORKDIR /src
-COPY go.mod ./
+COPY go.mod go.sum ./
+COPY vendor/ ./vendor/
 COPY cmd/api/main.go ./cmd/api/main.go
 
-# Descargar dependencias verificadas y compilar binario estático sin símbolos de depuración
-RUN go mod download && \
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
+# Compilación estática determinista usando los paquetes verificados en vendor/
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
+    -mod=vendor \
     -ldflags="-w -s -extldflags '-static'" \
     -tags netgo,osusergo \
     -o /out/saas-api-service ./cmd/api/main.go
