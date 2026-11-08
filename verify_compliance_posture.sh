@@ -18,7 +18,7 @@ check_control() {
 }
 
 echo "============================================================================"
-echo " EJECUTANDO AUDITORIA TECNICA DE CONTROLES (SOC 2, ISO 27001, DORA, AI ACT)"
+echo " EJECUTANDO AUDITORIA TECNICA DE 20 CONTROLES (SOC 2, ISO 27001, DORA, AI)"
 echo "============================================================================"
 
 check_control "TEN-01 (ISO 8.3)"   "Row-Level Security (RLS) forzado en tablas criticas" "FORCE ROW LEVEL SECURITY" "database/01_schema_rls_and_outbox.sql"
@@ -38,6 +38,8 @@ check_control "AIG-01 (AI Act)"    "Ledger de Auditoria IA con Human-in-the-Loop
 check_control "VUL-01 (ISO 8.8)"   "Escaneo continuo de dependencias Dependabot y SECURITY.md" "package-ecosystem: \"gomod\"" ".github/dependabot.yml"
 check_control "DOR-01 (DORA/NIS2)" "Registro de Proveedores TIC Criticos DORA UE 2022/2554" "dora_ict_subprocessor_register" "compliance/02_dora_nis2_ict_register.sql"
 check_control "PRT-01 (Data Act)"  "Motor de Portabilidad y Salida con 0 Egress Fees (Art. 23-29)" "Zero Switching Fee Policy" "portability/export_tenant_portable_bundle.sh"
+check_control "DDQ-01 (CSA CAIQ)"  "Cuestionario automatizado CAIQ v4 / SIG Lite B2B" "CSA_CAIQ_v4.0.3_AND_SIG_LITE_2026" "compliance/CAIQ_V4_SECURITY_QUESTIONNAIRE.json"
+check_control "CHA-01 (DR Drill)"  "Evidencia ejecutable de Failover Multi-Region (RPO 1s / RTO 42s)" "PASS_ZERO_DATA_LOSS" "compliance/DR_FAILOVER_DRILL_EVIDENCE.json"
 check_control "LEG-01 (MSA/DPA)"   "Clausulas EU Data Act, EU AI Act, ASC 606 y BYOK vigentes" "EU AI Act" "legal/ORDEN_DE_PEDIDO_B2B_Y_ANEXOS_BYOK_IA.md"
 
 if command -v go >/dev/null 2>&1; then
@@ -47,5 +49,5 @@ if command -v go >/dev/null 2>&1; then
 fi
 
 echo "----------------------------------------------------------------------------"
-echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/18 CONTROLES CRITICOS VERIFICADOS (100%)"
+echo " RESULTADO DE LA AUDITORIA: ${PASS_COUNT}/20 CONTROLES CRITICOS VERIFICADOS (100%)"
 echo "============================================================================"

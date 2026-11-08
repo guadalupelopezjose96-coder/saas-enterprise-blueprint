@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.7.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.7",
-  "serialNumber": "urn:uuid:6dff77e0-c3c0-4507-9e39-6ba358a86e68",
+  "serialNumber": "urn:uuid:354ffeeb-1ef6-4767-9122-71174f8bcfe6",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-08T00:49:02+00:00",
+    "timestamp": "2026-11-08T00:50:47+00:00",
     "tools": {
       "components": [
         {
@@ -20,7 +20,7 @@
       ]
     },
     "component": {
-      "bom-ref": "2e5326f8-7aa1-47d4-acc8-f69fef01d7eb",
+      "bom-ref": "f94179fe-9222-46e0-ad46-dfdb8b7c921e",
       "type": "application",
       "name": ".",
       "properties": [
@@ -33,7 +33,7 @@
   },
   "components": [
     {
-      "bom-ref": "578443d7-61f3-4cd4-aa92-da0dc5c9347a",
+      "bom-ref": "c1835bb0-a6e4-430e-bb98-58ec430ce296",
       "type": "application",
       "name": "go.mod",
       "properties": [
@@ -90,15 +90,15 @@
   ],
   "dependencies": [
     {
-      "ref": "2e5326f8-7aa1-47d4-acc8-f69fef01d7eb",
+      "ref": "c1835bb0-a6e4-430e-bb98-58ec430ce296",
       "dependsOn": [
-        "578443d7-61f3-4cd4-aa92-da0dc5c9347a"
+        "pkg:golang/github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint"
       ]
     },
     {
-      "ref": "578443d7-61f3-4cd4-aa92-da0dc5c9347a",
+      "ref": "f94179fe-9222-46e0-ad46-dfdb8b7c921e",
       "dependsOn": [
-        "pkg:golang/github.com/guadalupelopezjose96-coder/saas-enterprise-blueprint"
+        "c1835bb0-a6e4-430e-bb98-58ec430ce296"
       ]
     },
     {

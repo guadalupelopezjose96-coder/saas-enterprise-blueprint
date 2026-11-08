@@ -1,0 +1,36 @@
+{
+  "schema": "CSA_CAIQ_v4.0.3_AND_SIG_LITE_2026",
+  "organization": "Standard 1979 Enterprise SaaS Blueprint",
+  "release_version": "v4.0.0",
+  "cryptographic_identity": "ED25519 SHA256:KwUySdN/G/MP10KULN+FYsyZ9XyNS9osjmNHbBEvE3s",
+  "controls_assertion": [
+    {
+      "domain": "Application & Interface Security (AIS)",
+      "control_id": "AIS-01 / INT-01",
+      "question": "Are multi-tenant data isolation and idempotency enforced at the database and API layers?",
+      "answer": "YES",
+      "evidence_artifact": "database/01_schema_rls_and_outbox.sql & cmd/api/main.go"
+    },
+    {
+      "domain": "Cryptography, Encryption & Key Management (CEK)",
+      "control_id": "CEK-01 / CRY-02",
+      "question": "Does the platform support customer-managed keys (BYOK) and FIPS 140-3 Level 3 HSM annual rotation?",
+      "answer": "YES",
+      "evidence_artifact": "terraform/main.tf & legal/ORDEN_DE_PEDIDO_B2B_Y_ANEXOS_BYOK_IA.md"
+    },
+    {
+      "domain": "Governance, Risk & Compliance (GRC)",
+      "control_id": "GRC-01 / FIN-01 / AIG-01",
+      "question": "Are ASC 606 revenue recognition, EU AI Act Art. 14 human oversight, and DORA ICT registers enforced?",
+      "answer": "YES",
+      "evidence_artifact": "finops/asc606_revenue_engine.sql & ai_governance/01_eu_ai_act_audit_ledger.sql"
+    },
+    {
+      "domain": "Supply Chain & DevSecOps (DEV)",
+      "control_id": "DEV-02 / DEV-03",
+      "question": "Are container images Distroless, scanned against viral OSS licenses (AGPL/GPL), and signed via Sigstore Cosign?",
+      "answer": "YES",
+      "evidence_artifact": ".github/workflows/ci-cd-slsa3-pipeline.yml & Dockerfile"
+    }
+  ]
+}
