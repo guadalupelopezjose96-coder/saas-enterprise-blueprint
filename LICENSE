@@ -1,0 +1,17 @@
+PROPRIETARY COMMERCIAL SOFTWARE & COMPLIANCE BLUEPRINT LICENSE AGREEMENT
+Copyright (c) 2026 Standard 1979 Holdings, LLC / Guadalupe Lopez Jose. All Rights Reserved.
+
+1. GRANT OF CONDITIONAL COMMERCIAL LICENSE
+Subject to the timely payment of applicable license fees and strict compliance with the terms herein, the Copyright Holder grants the Licensee a non-exclusive, non-transferable, non-sublicensable, revocable license to use, modify, and deploy the "Enterprise SaaS B2B Master Blueprint" (the "Software and Documentation") solely within the scope of the purchased Commercial Tier (Startup, Enterprise, or White-Label Partner). Unlicensed copying, public redistribution, sub-licensing, or resale of this repository or its cryptographic bundles is strictly prohibited and constitutes copyright infringement under 17 U.S.C. § 501 and international treaties (Berne Convention & WIPO Copyright Treaty).
+
+2. REGULATORY, AUDIT & CERTIFICATION DISCLAIMER (NO ACCREDITED AUDITOR REPRESENTATION)
+THE SOFTWARE AND DOCUMENTATION CONSTITUTE A TECHNICAL REFERENCE ARCHITECTURE AND COMPLIANCE AUTOMATION ACCELERATOR ("AUDIT-READY BLUEPRINT"). PURCHASE, DEPLOYMENT, OR EXECUTION OF THIS REPOSITORY DOES NOT CONSTITUTE, GRANT, OR SUBSTITUTE AN OFFICIAL CERTIFICATION OR ATTESTATION REPORT ISSUED BY AN ACCREDITED THIRD-PARTY ASSESSMENT ORGANIZATION (3PAO), CERTIFIED PUBLIC ACCOUNTANT (AICPA SOC 2), OR ISO/IEC 17021-1 ACCREDITED CERTIFICATION BODY (ISO/IEC 27001 / ISO/IEC 42001). THE LICENSEE REMAINS SOLELY RESPONSIBLE FOR ENGAGING INDEPENDENT ACCREDITED AUDITORS TO CERTIFY ITS OWN PRODUCTION ENVIRONMENT AND ORGANIZATIONAL CONTROLS.
+
+3. NO LEGAL, TAX, OR ACCOUNTING ADVICE (NO ATTORNEY-CLIENT OR CPA RELATIONSHIP)
+The contractual templates (MSA, DPA, SLA, BAA, Order Forms), tax calculation schemas (VAT Reverse Charge, US Sales Tax Nexus, OECD BEPS), and accounting engines (ASC 606 / IFRS 15) included in this repository are provided strictly as technical and structural reference models. Nothing herein constitutes formal legal, tax, financial, or accounting advice. Licensee must review and adapt all legal and financial artifacts with qualified legal counsel and certified public accountants licensed in Licensee's applicable jurisdictions prior to commercial use.
+
+4. WARRANTY DISCLAIMER & LIMITATION OF LIABILITY (UCC § 2-316)
+THE SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES, REGULATORY FINES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE, EXCEEDING THE TOTAL AMOUNT ACTUALLY PAID BY LICENSEE FOR THE LICENSE IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.
+
+5. OPEN-SOURCE THIRD-PARTY COMPONENTS
+Third-party open-source dependencies referenced in go.mod (specifically github.com/lib/pq under the permissive MIT License) remain governed by their respective original licenses as documented in THIRD-PARTY-NOTICES.txt and compliance/spdx_v2.3_iso5962_sbom.json. Zero viral copyleft (AGPL/GPL/SSPL) components are included.
