@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout Inmutable del Codigo Fuente
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Configurar Entorno Go (ISO 8.29)
         uses: actions/setup-go@v5
@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout del Codigo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Compilar Imagen Inmutable Distroless y Verificar SBOM Dual (CycloneDX + SPDX 2.3)
         run: |
