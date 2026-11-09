@@ -2,7 +2,7 @@
 # CONTENEDOR INMUTABLE DISTROLESS (SLSA NIVEL 3 / CIS BENCHMARK NIVEL 2)
 # Cumplimiento: ISO/IEC 27001:2022 (A.8.18, A.8.19, A.8.27) | SOC 2 (CC6.8)
 # =============================================================================
-FROM golang:1.22-alpine AS builder
+FROM golang:1.25-alpine AS builder
 
 WORKDIR /src
 COPY go.mod ./
